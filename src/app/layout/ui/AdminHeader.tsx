@@ -5,9 +5,9 @@ import UserPopover from "./UserPopover";
 import { Separator } from "@/shared/components/ui/separator";
 import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router-dom";
-import { ROLE, ROUTES_URL } from "@/shared/constants";
+import { ROUTES_URL } from "@/shared/constants";
 
-function Header() {
+function AdminHeader() {
   const { user } = useMeStore();
 
   return (
@@ -18,19 +18,15 @@ function Header() {
         <h1 className="ml-2">Logo</h1>
       </Horizontal>
       <Horizontal className="h-5 items-center space-x-1">
-        {
-          user?.roles.includes(ROLE.ADMIN) && (
-            <Button size={"xs"} >
-              <Link to={ROUTES_URL.ADMIN}>
-                관리자
-              </Link>
-            </Button>
-          )
-        }
+        <Button size={"xs"} >
+          <Link to={ROUTES_URL.HOME}>
+            홈으로
+          </Link>
+        </Button>
         <UserPopover user={user} />
       </Horizontal>
     </Horizontal>
   );
 };
 
-export default Header;
+export default AdminHeader;

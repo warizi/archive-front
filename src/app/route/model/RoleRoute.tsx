@@ -3,6 +3,7 @@ import { useCheckUser } from "@/features/user/model/authApiHooks";
 import { ROUTES_URL } from "@/shared/constants";
 import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { toast } from "sonner";
 
 interface RoleRouteProps {
   requiredRoles: string[];
@@ -15,7 +16,7 @@ function RoleRoute({ requiredRoles }: RoleRouteProps) {
 
   useEffect(() => {
     if (user && !hasAccess) {
-      alert("권한이 없습니다.");
+      toast.error("권한이 없습니다.");
     }
   }, [user, hasAccess]);
 

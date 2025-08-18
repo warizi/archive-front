@@ -45,14 +45,15 @@ export const useCheckUser = () => {
   const { setUser } = useMeStore();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  console.log(data)
+  
   useEffect(() => {
     if (data) {
+      console.log(data);
       setUser(data); // data가 새로 들어올 때만 실행
     }
   }, [data, setUser]); // ✅ 의존성 정확히 지정
 
-    useEffect(() => {
+  useEffect(() => {
     const logoutHandler = () => {
       queryClient.removeQueries({ queryKey: authKey.me });
       navigate(ROUTES_URL.LOGIN);

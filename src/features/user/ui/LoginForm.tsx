@@ -5,18 +5,20 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/shared/components/ui/button";
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
+import { useNavigate } from "react-router-dom";
+import { ROUTES_URL } from "@/shared/constants";
+import { useLoginSubmit } from "../model/useLoginSubmit";
 
 function LoginForm() {
+  const navigate = useNavigate();
   const form = useForm<LoginFormType>({
     resolver: zodResolver(loginFormSchema),
   });
 
-  const onSubmit = (data: LoginFormType) => {
-    console.log(data);
-  }
+  const { onSubmit } = useLoginSubmit();
 
   return (
-    <Card className="max-w-[350px]">
+    <Card className="w-[350px]">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <CardHeader>
@@ -28,7 +30,7 @@ function LoginForm() {
             <FormItem>
               <FormLabel>아이디</FormLabel>
               <FormControl>
-                <Input {...form.register("username")} />
+                <Input placeholder="아이디를 입력해주세요." autoComplete="username" {...form.register("username")} />
               </FormControl>
               <FormMessage>
                 {form.formState.errors.username?.message}
@@ -37,7 +39,7 @@ function LoginForm() {
             <FormItem>
               <FormLabel>비밀번호</FormLabel>
               <FormControl>
-                <Input type="password" {...form.register("password")} />
+                <Input type="password" placeholder="비밀번호를 입력해주세요." autoComplete="current-password" {...form.register("password")} />
               </FormControl>
               <FormMessage>
                 {form.formState.errors.password?.message}
@@ -45,7 +47,13 @@ function LoginForm() {
             </FormItem>
           </CardContent>
           <CardDescription className="flex justify-center">
-            <Button variant={"link"} size={"sm"} type="button" className="text-gray-500 hover:text-gray-900">
+            <Button 
+              variant={"link"} 
+              size={"sm"} 
+              type="button" 
+              className="text-gray-500 hover:text-gray-900 text-xs"
+              onClick={() => navigate(ROUTES_URL.SIGNUP)}
+            >
               회원가입이 필요하신가요? 회원가입
             </Button>
           </CardDescription>

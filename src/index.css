@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 
 body {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(239, 239, 239);
 }
 
 @custom-variant dark (&:is(.dark *));
