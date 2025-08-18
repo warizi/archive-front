@@ -1,5 +1,5 @@
 
-import { useCheckUser } from "@/features/user/model/authHooks";
+import { useCheckUser } from "@/features/user/model/authApiHooks";
 import { ROUTES_URL } from "@/shared/constants";
 import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";

@@ -8,11 +8,11 @@ function MainLayout() {
   return (
     <Vertical className="w-full">
         <Header />
-      <Horizontal className="w-full min-h-screen">
+      <Horizontal className="w-full h-[calc(100vh-60px)]">
       <aside>
         <BasicSidebar />
       </aside>
-        <main>
+        <main className="flex-1">
           <Outlet />
         </main>
       </Horizontal>

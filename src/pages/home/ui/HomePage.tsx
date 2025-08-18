@@ -1,8 +1,10 @@
+import { LoginForm, SignupForm } from "@/features/user";
 
 function HomePage() {
   return (
     <div>
-      <h1>Home Page</h1>
+      <LoginForm />
+      <SignupForm />
     </div>
   );
 };
