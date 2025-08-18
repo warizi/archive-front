@@ -1,20 +1,18 @@
-import { Button } from "@/shared/components/ui/button"
-import { Toaster } from "@/shared/components/ui/sonner"
-import { toast } from "sonner"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { DefaultRouter } from "./route"
+import { RouterProvider } from "react-router-dom";
+import { SidebarProvider } from "@/shared/components/ui/sidebar";
 
+const queryClient = new QueryClient();
 
 function App() {
 
   return (
-    <>
-    <div className="bg-red-50">test</div>
-    <Button
-     onClick={() => {
-      toast("Button clicked!")
-     }}
-    >button</Button>
-      <Toaster />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <SidebarProvider>
+        <RouterProvider router={DefaultRouter}/>
+      </SidebarProvider>
+    </QueryClientProvider>
   )
 }
 
