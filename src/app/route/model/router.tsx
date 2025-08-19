@@ -7,6 +7,7 @@ import { HomePage } from "@/pages/home";
 import { LoginPage, LogoutPage, SignupPage } from "@/pages/auth";
 import AdminLayout from "@/app/layout/ui/AdminLayout";
 import { AdminDashboardPage } from "@/pages/admin";
+import { TodoCompletePage, TodoImportantPage, TodoPage, TodoTodayPage } from "@/pages/todo";
 
 export const DefaultRouter = createBrowserRouter([
 
@@ -31,7 +32,13 @@ export const DefaultRouter = createBrowserRouter([
         children: [
           {
             element: <MainLayout />, // 동일 레이아웃 사용
-            children: [{ path: ROUTES_URL.HOME, element: <HomePage /> }],
+              children: [
+                { path: ROUTES_URL.HOME, element: <HomePage /> },
+                { path: ROUTES_URL.TODO_TODAY, element: <TodoTodayPage /> },
+                { path: ROUTES_URL.TODO, element: <TodoPage /> },
+                { path: ROUTES_URL.TODO_IMPORTANT, element: <TodoImportantPage /> },
+                { path: ROUTES_URL.TODO_COMPLETE, element: <TodoCompletePage /> },
+              ],
           },
         ],
       },
