@@ -1,14 +1,11 @@
-import useMeStore from "@/features/user/model/meStore";
 import Horizontal from "@/shared/components/ui/Horizontal";
 import { SidebarTrigger } from "@/shared/components/ui/sidebar";
-import UserPopover from "./UserPopover";
 import { Separator } from "@/shared/components/ui/separator";
 import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router-dom";
 import { ROUTES_URL } from "@/shared/constants";
 
 function AdminHeader() {
-  const { user } = useMeStore();
 
   return (
     <Horizontal justify="between" align="center" className="h-[40px] px-2 z-50">
@@ -23,7 +20,6 @@ function AdminHeader() {
             홈으로
           </Link>
         </Button>
-        <UserPopover user={user} />
       </Horizontal>
     </Horizontal>
   );

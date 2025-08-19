@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES_URL } from "@/shared/constants";
 import { loginApi, logoutApi, meApi, signupApi } from "../api/authApi";
-import useMeStore from "./meStore";
+import useMeStore from "./useMeStore";
 
 export const authKey = {
   me: ["auth", "me"] as const

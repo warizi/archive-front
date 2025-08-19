@@ -35,7 +35,7 @@ export const DefaultRouter = createBrowserRouter([
           },
         ],
       },
-      {
+      { // admin page
         element: <RoleRoute requiredRoles={[ROLE.ADMIN]} />,
         children: [
           {

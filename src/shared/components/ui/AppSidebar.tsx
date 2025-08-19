@@ -38,7 +38,7 @@ export default function AppSidebar({
 }: AppSidebarProps) {
   const renderItems = React.useCallback(
     (items: SidebarItemType[], level = 0) => (
-      <SidebarMenu style={level ? { paddingLeft: level * 12 } : undefined}>
+      <SidebarMenu style={level ? { paddingLeft: level * 8 } : undefined}>
         {items.map((item) => (
           <SidebarMenuItem key={`${item.title}-${item.url}`}>
             <SidebarMenuButton tooltip={item.title} asChild>
@@ -48,7 +48,7 @@ export default function AppSidebar({
               </a>
             </SidebarMenuButton>
             {item.subItems?.length ? (
-              <div className="mt-1">{renderItems(item.subItems, level + 1)}</div>
+              <div>{renderItems(item.subItems, level + 1)}</div>
             ) : null}
           </SidebarMenuItem>
         ))}

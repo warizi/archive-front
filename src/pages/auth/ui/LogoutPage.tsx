@@ -1,5 +1,5 @@
 import { useLogoutMutation } from "@/features/user/model/authApiHooks";
-import useMeStore from "@/features/user/model/meStore";
+import useMeStore from "@/features/user/model/useMeStore";
 import { tokenStore } from "@/shared/config/tokenStore";
 import { ROUTES_URL } from "@/shared/constants";
 import { useEffect } from "react";
