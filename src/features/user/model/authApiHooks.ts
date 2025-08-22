@@ -48,7 +48,6 @@ export const useCheckUser = () => {
   
   useEffect(() => {
     if (data) {
-      console.log(data);
       setUser(data); // data가 새로 들어올 때만 실행
     }
   }, [data, setUser]); // ✅ 의존성 정확히 지정

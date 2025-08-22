@@ -8,7 +8,7 @@ function ProfileCard() {
   return (
     <Horizontal justify="center" align="center" className="h-12 gap-2">
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
+        <AvatarImage src="https://github.com/shadcn.png" alt="프로필 이미지" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <Vertical className="text-sm">

@@ -1,21 +1,12 @@
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/shared/components/ui/collapsible";
 import { Separator } from "@/shared/components/ui/separator";
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuAction, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from "@/shared/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/components/ui/sidebar";
 import { ROUTES_URL } from "@/shared/constants";
-import { cn } from "@/shared/lib/utils";
-import { BookCheck, Calendar1, Check, ChevronRight, Home, Plus, Star, Tag, Tags } from "lucide-react";
-import { useState } from "react";
+import { BookCheck, Calendar, Calendar1, CalendarCheck, Check, Folder, Home, NotepadText, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfileSidebarFooter from "./ProfileSidebarFooter";
 import WorkSpaceSidebarHeader from "./WorkSpaceSidebarHeader";
-import { useTodoCateGetAllQuery } from "@/features/todo";
-import { TodoCateContextMenu, TodoCateSaveDialog } from "@/widgets/todo";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/shared/components/ui/hover-card";
 
 function MainSidebar() {
-  const [ todoCategoryOpen, setTodoCategoryOpen ] = useState(false);
-  const { data } = useTodoCateGetAllQuery();
-  console.log("todo cate: ", data);
   return (
     <Sidebar collapsible="icon">
       <WorkSpaceSidebarHeader />
@@ -74,66 +65,6 @@ function MainSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <Collapsible 
-                className="group/collapsible"
-                open={todoCategoryOpen}
-                onOpenChange={setTodoCategoryOpen}
-              >
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton tooltip={"할 일 카테고리"}>
-                      <Tags size={16}/>
-                      <div className="flex items-center justify-between w-full">
-                        <span className="truncate group-data-[collapsible=icon]/sidebar:hidden">
-                          할 일 카테고리
-                        </span>
-                        <ChevronRight
-                          className={cn(
-                            "h-4 w-4 shrink-0 transition-transform duration-200",
-                            todoCategoryOpen ? "rotate-90" : "rotate-0"
-                          )}
-                        />
-                      </div>
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                    <SidebarMenuAction className="cursor-pointer">
-                      <TodoCateSaveDialog>
-                        <Plus />
-                      </TodoCateSaveDialog>
-                    </SidebarMenuAction>
-                  <CollapsibleContent className="CollapsibleContent">
-                    <SidebarMenuSub>
-                      {data?.map((cate) => (
-                        <SidebarMenuSubItem key={cate.id}>
-                          <HoverCard openDelay={1400}>
-                            <TodoCateContextMenu todoCategory={cate}>
-                              <HoverCardTrigger>
-                                <SidebarMenuSubButton asChild>
-                                    <Link to={"#"}>
-                                      <Tag color={"white"} fill={cate.colorHex ? cate.colorHex : "#000000"} strokeWidth={2} className="scale-90"/>
-                                      <span className="flex gap-1 items-center w-full">
-                                        {cate.title}
-                                      </span>
-                                    </Link>
-                                </SidebarMenuSubButton>
-                              </HoverCardTrigger>
-                            </TodoCateContextMenu>    
-                            {
-                              cate.description && (
-                                <HoverCardContent>
-                                  <p className="text-xs text-muted-foreground">
-                                    {cate.description}
-                                  </p>
-                                </HoverCardContent>
-                              )
-                            }
-                          </HoverCard>
-                        </SidebarMenuSubItem>
-                      ))}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
               <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"완료한 일"} asChild>
                   <Link to={ROUTES_URL.TODO_COMPLETE}>
@@ -152,7 +83,28 @@ function MainSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>Note</SidebarGroupLabel>
           <SidebarGroupContent>
-                      
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton tooltip={"전체 노트"} asChild>
+                  <Link to={"#"}>
+                    <NotepadText />
+                    <span>
+                      전체 노트
+                    </span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton tooltip={"폴더"} asChild>
+                  <Link to={"#"}>
+                    <Folder />
+                    <span>
+                      폴더
+                    </span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
         <Separator />
@@ -160,7 +112,28 @@ function MainSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>Calendar</SidebarGroupLabel>
           <SidebarGroupContent>
-                      
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton tooltip={"달력 일정"} asChild>
+                  <Link to={"#"}>
+                    <Calendar />
+                    <span>
+                      달력 일정
+                    </span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton tooltip={"달력 기록"} asChild>
+                  <Link to={"#"}>
+                    <CalendarCheck />
+                    <span>
+                      달력 기록
+                    </span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
