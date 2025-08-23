@@ -2,11 +2,30 @@ import { categorySchema } from "@/entities/catogory";
 import z from "zod";
 import { todoSubSchema } from "./TodoSub";
 
-const IMPORTANCE = {
+export const IMPORTANCE = {
   low: 'low',
   medium: 'medium',
   high: 'high'
 }
+
+export const HOURS = Array.from({ length: 24 }, (_, i) =>
+  String(i).padStart(2, "0")
+);
+export const MINUTES = ["00", "30"] as const;
+
+export type Hour = typeof HOURS[number];   // "00" | "01" | ... | "23"
+export type Minute = typeof MINUTES[number]; // "00" | "30"
+export type Time = `${Hour}:${Minute}`;
+
+// 기존 형태(값=라벨)도 필요하면 안전하게 생성
+export const TODO_TIME = {
+  hour: Object.fromEntries(HOURS.map(h => [h, h])) as Record<Hour, Hour>,
+  minute: Object.fromEntries(MINUTES.map(m => [m, m])) as Record<Minute, Minute>,
+} as const;
+
+// UI 옵션 배열이 더 쓰기 편함
+export const HOUR_OPTIONS = HOURS.map(h => ({ label: h, value: h }));
+export const MINUTE_OPTIONS = MINUTES.map(m => ({ label: m, value: m }));
 
 export const TODO_VALID = {
   title: {
@@ -18,6 +37,8 @@ export const TODO_VALID = {
     max: 500
   }
 }
+ 
+export const TimeSchema = z.string().regex(/^(?:[01]\d|2[0-3]):(?:00|30)$/);
 
 export const TODO_ERROR_MESSAGE = {
   title: {
@@ -48,7 +69,8 @@ export const todoSchema = z.object({
   startDate: z.date().optional(),
   endDate: z.date().optional(),
   importance: z.enum([IMPORTANCE.low, IMPORTANCE.medium, IMPORTANCE.high]).optional(),
-  subTodo: z.array(todoSubSchema.omit({ id: true })).optional()
+  subTodo: z.array(todoSubSchema.omit({ id: true })).optional(),
+  time: TimeSchema.optional()
 });
 
 export type TodoType = z.infer<typeof todoSchema>;
