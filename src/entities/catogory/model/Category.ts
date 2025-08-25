@@ -4,7 +4,7 @@ export const CATEGORY_VALID = {
   name: {
     required: true,
     min: 2,
-    max: 20
+    max: 100
   },
   description: {
     max: 200
@@ -26,8 +26,8 @@ export const categorySchema = z.object({
   id: z.number().optional(),
   name: z.string({
     error: CATEGORY_ERROR_MESSAGE.name.required
-  }).min(1, { error: CATEGORY_ERROR_MESSAGE.name.min }).max(20, { error: CATEGORY_ERROR_MESSAGE.name.max }),
-  description: z.string().max(200, { error: CATEGORY_ERROR_MESSAGE.description.max }).optional(),
+  }).min(1, { error: CATEGORY_ERROR_MESSAGE.name.min }).max(CATEGORY_VALID.name.max, { error: CATEGORY_ERROR_MESSAGE.name.max }),
+  description: z.string().max(CATEGORY_VALID.description.max, { error: CATEGORY_ERROR_MESSAGE.description.max }).optional(),
   colorHex: z.string().max(7).optional(),
   order: z.number().int().min(0).optional()
 });

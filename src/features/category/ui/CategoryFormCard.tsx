@@ -27,7 +27,6 @@ function CategoryFormCard({
   });
 
   const handleOnSubmit = (data: CategoryType) => {
-    console.log("submit", data);
     onSubmit(data);
     form.reset();
   }

@@ -115,79 +115,81 @@ function CategoryListTable({
                         </TableCell>
                       </TableRow>
                     ) : (
-                      <AlertDialog>
+                      <>
                         {item?.map((category: CategoryWithIdPresent) => (
                           <>
-                            <DraggableWrapper
-                              key={category.id}
-                              id={category.id}
-                              asChild
-                              >
-                              <TableRow 
-                                key={category.id} 
-                                selected={selectedCategory?.id === category.id} 
-                                className="cursor-pointer group"
-                              >
-                                <TableCell width={50}>
-                                  <CategoryTag category={category}/>
-                                </TableCell>
-                                <TableCell
-                                  onClick={() => handleSelect(category)} 
+                            <AlertDialog>
+                              <DraggableWrapper
+                                key={category.id}
+                                id={category.id}
+                                asChild
                                 >
-                                  {category.name}
-                                </TableCell>
-                                <TableCell width={20}>
-                                    <AlertDialogTrigger asChild>
-                                      <Button variant={"ghost"} size={"xs"} aria-label="삭제"             
-                                        className="
-                                        opacity-0 pointer-events-none
-                                        group-hover:opacity-100 group-hover:pointer-events-auto
-                                        group-data-[state=selected]:opacity-100 group-data-[state=selected]:pointer-events-auto
-                                        focus:opacity-100 focus:pointer-events-auto
-                                        transition-opacity"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                        }}
-                                      >
-                                        <Trash2
+                                <TableRow 
+                                  key={category.id} 
+                                  selected={selectedCategory?.id === category.id} 
+                                  className="cursor-pointer group"
+                                >
+                                  <TableCell width={50}>
+                                    <CategoryTag category={category}/>
+                                  </TableCell>
+                                  <TableCell
+                                    onClick={() => handleSelect(category)} 
+                                  >
+                                    {category.name}
+                                  </TableCell>
+                                  <TableCell width={20}>
+                                      <AlertDialogTrigger asChild>
+                                        <Button variant={"ghost"} size={"xs"} aria-label="삭제"             
                                           className="
-                                            h-4 w-4 transition-colors
-                                            text-zinc-400 dark:text-zinc-500
-                                            group-hover:text-red-600 dark:group-hover:text-red-400
-                                            active:text-red-700 dark:active:text-red-300
-                                          "
-                                          strokeWidth={1.3}
-                                        />
-                                      </Button>
-                                    </AlertDialogTrigger>
-                                </TableCell>
-                              </TableRow>
-                            </DraggableWrapper>
+                                          opacity-0 pointer-events-none
+                                          group-hover:opacity-100 group-hover:pointer-events-auto
+                                          group-data-[state=selected]:opacity-100 group-data-[state=selected]:pointer-events-auto
+                                          focus:opacity-100 focus:pointer-events-auto
+                                          transition-opacity"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                          }}
+                                        >
+                                          <Trash2
+                                            className="
+                                              h-4 w-4 transition-colors
+                                              text-zinc-400 dark:text-zinc-500
+                                              group-hover:text-red-600 dark:group-hover:text-red-400
+                                              active:text-red-700 dark:active:text-red-300
+                                            "
+                                            strokeWidth={1.3}
+                                          />
+                                        </Button>
+                                      </AlertDialogTrigger>
+                                  </TableCell>
+                                </TableRow>
+                              </DraggableWrapper>
 
-                            {/* 삭제 dialog */}
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                  선택한 카테고리를 삭제하시겠습니까?
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  연결된 모든 요소의 해당 카테고리가 삭제됩니다.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>
-                                  취소
-                                </AlertDialogCancel>
-                                <AlertDialogAction
-                                  onClick={() => handleDelete(category?.id)}
-                                >
-                                  삭제
-                                </AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
+                              {/* 삭제 dialog */}
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>
+                                    선택한 카테고리를 삭제하시겠습니까?
+                                  </AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    연결된 모든 요소의 해당 카테고리가 삭제됩니다.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>
+                                    취소
+                                  </AlertDialogCancel>
+                                  <AlertDialogAction
+                                    onClick={() => handleDelete(category?.id)}
+                                  >
+                                    삭제
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </>
                         ))}
-                      </AlertDialog>
+                      </>
                     )
                   }
                 </TableBody>

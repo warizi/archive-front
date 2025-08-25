@@ -1,11 +1,13 @@
 import { categorySchema } from "@/entities/catogory";
 import z from "zod";
 import { todoSubSchema } from "./TodoSub";
+import { todoRepeatSchema } from "./TodoRepeat";
 
 export const IMPORTANCE = {
   low: 'low',
   medium: 'medium',
-  high: 'high'
+  high: 'high',
+  none: ''
 }
 
 export const HOURS = Array.from({ length: 24 }, (_, i) =>
@@ -48,14 +50,21 @@ export const TODO_ERROR_MESSAGE = {
   },
   description: {
     max: `할 일 설명은 최대 ${TODO_VALID.description.max}자까지 입력할 수 있습니다.`
+  },
+  endDate: {
+    invalid: "종료일은 시작일 이후여야 합니다."
   }
 }
+
+const YMD = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 
 export const todoSchema = z.object({
   id: z.number().optional(),
   title: z.string({
     error: TODO_ERROR_MESSAGE.title.required
-  }).min(2, {
+  })
+  .trim()
+  .min(2, {
     message: TODO_ERROR_MESSAGE.title.min
   }).max(100, {
     message: TODO_ERROR_MESSAGE.title.max
@@ -63,18 +72,19 @@ export const todoSchema = z.object({
   description: z.string().max(500, {
     message: TODO_ERROR_MESSAGE.description.max
   }).optional(),
-  completed: z.boolean().default(false),
+  completed: z.boolean(),
   order: z.number().min(0).optional(),
-  category: categorySchema.optional(),
-  startDate: z.date().optional(),
-  endDate: z.date().optional(),
-  importance: z.enum([IMPORTANCE.low, IMPORTANCE.medium, IMPORTANCE.high]).optional(),
+  category: categorySchema.required({ id: true }).optional(),
+  startDate: YMD.optional(),
+  endDate: YMD.optional(),
+  importance: z.enum([IMPORTANCE.low, IMPORTANCE.medium, IMPORTANCE.high, IMPORTANCE.none]).optional(),
   subTodo: z.array(todoSubSchema.omit({ id: true })).optional(),
-  time: TimeSchema.optional()
-});
+  time: TimeSchema.optional(),
+  repeat: todoRepeatSchema.optional(),
+})
 
 export type TodoType = z.infer<typeof todoSchema>;
 
 export type TodoWithIdPresent = TodoType & Required<Pick<TodoType, 'id'>>;
 
-export type CategoryCreateType = Omit<TodoType, "id">;
+export type TodoCreateType = Omit<TodoType, "id">;

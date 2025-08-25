@@ -25,7 +25,7 @@ export const todoSubSchema = z.object({
   }).max(100, {
     message: TODO_SUB_ERROR_MESSAGE.title.max
   }),
-  completed: z.boolean().default(false),
+  completed: z.boolean(),
   order: z.number().min(0).optional(),
   parentId: z.number()
 });
