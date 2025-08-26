@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createCategoryApi, deleteCategoryApi, getCategoryApi, getCategoryListApi, updateCategoryApi, updateCategoryOrdersApi } from "../api/categoryApi"
 import type { PageRequest } from "@/shared/type/request"
 import type { CategoryCreateType, CategoryType } from "@/entities/catogory/model/Category";
+import { TODO_QUERY_KEY } from "@/entities/todo";
 
 export const categoryKey = {
   list: () => [`category`, `list`] as const,
@@ -25,6 +26,7 @@ export const useCreateCategoryMutation = () => {
     mutationFn: (data: CategoryCreateType) => createCategoryApi(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: categoryKey.list() });
+      queryClient.invalidateQueries({ queryKey: TODO_QUERY_KEY.LIST });
     }
   });
 };
@@ -41,6 +43,7 @@ export const useUpdateCategoryMutation = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: categoryKey.list() });
+      queryClient.invalidateQueries({ queryKey: TODO_QUERY_KEY.LIST });
     }
   });
 };
@@ -52,6 +55,7 @@ export const useDeleteCategoryMutation = () => {
     mutationFn: (id: number) => deleteCategoryApi(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: categoryKey.list() });
+      queryClient.invalidateQueries({ queryKey: TODO_QUERY_KEY.LIST });
     }
   });
 };

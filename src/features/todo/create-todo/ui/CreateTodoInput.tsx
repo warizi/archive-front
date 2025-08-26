@@ -9,9 +9,10 @@ import axios from "axios";
 
 interface CreateTodoInputProps {
   category?: CategoryWithIdPresent
+  className?: string
 }
 
-function CreateTodoInput({ category }: CreateTodoInputProps) {
+function CreateTodoInput({ category, className }: CreateTodoInputProps) {
   const [ value, setValue ] = useState<string>("");
   const { mutate: createTodo } = useCreateTodo();
 
@@ -32,22 +33,15 @@ function CreateTodoInput({ category }: CreateTodoInputProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Horizontal className="gap-2">
+    <form onSubmit={handleSubmit} className={className}>
+      <Horizontal className="gap-2 items-center">
         <Input
           type="text"
           placeholder="새로운 할 일을 입력하여 추가하세요."
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              createTodo({ title: value, completed: false, category: category });
-              setValue("");
-            }
-          }}
         />
-        <Button type="submit">
+        <Button type="submit" size={"sm"}>
           추가
         </Button>
       </Horizontal>

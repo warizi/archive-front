@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/sha
 import RepeatControl from "./RepeatControl";
 import PeriodControl from "./PeriodControl";
 import { UPDATE_TODO_FORM_ID } from "../model/updateTodoFormId";
-import { useUpdateTodo } from "../model/updateTodoApiHooks";
+import { useUpdateTodo } from "../model/todoApiHooks";
 import { toast } from "sonner";
 import axios from "axios";
 import { useDebouncedAutosave } from "../model/UseDebouncedAutoSave";
@@ -65,8 +65,6 @@ function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
     mutate: updateTodoMutate,
   });
 
-  console.log("error", form.formState.errors)
-  console.log("form", form.getValues())
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4" id={UPDATE_TODO_FORM_ID}>

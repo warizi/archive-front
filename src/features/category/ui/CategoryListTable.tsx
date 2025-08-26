@@ -181,8 +181,11 @@ function CategoryListTable({
                                   </AlertDialogCancel>
                                   <AlertDialogAction
                                     onClick={() => handleDelete(category?.id)}
+                                    asChild
                                   >
-                                    삭제
+                                    <Button variant="destructive" className="text-white">
+                                      삭제
+                                    </Button>
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
                               </AlertDialogContent>

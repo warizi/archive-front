@@ -14,6 +14,7 @@ function CategorySelect({ selectedCategory, onCategoryChange, className }: Categ
     size: 30,
     sort: `sortOrder,desc`
   });
+  
   return (
     <Select 
       onValueChange={(id: string) => onCategoryChange(categories?.content.find(category => category.id === Number(id)))} 

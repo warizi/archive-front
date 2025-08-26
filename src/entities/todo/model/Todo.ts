@@ -73,12 +73,13 @@ export const todoSchema = z.object({
     message: TODO_ERROR_MESSAGE.description.max
   }).optional(),
   completed: z.boolean(),
+  completedDate: YMD.optional(),
   order: z.number().min(0).optional(),
   category: categorySchema.required({ id: true }).optional(),
   startDate: YMD.optional(),
   endDate: YMD.optional(),
   importance: z.enum([IMPORTANCE.low, IMPORTANCE.medium, IMPORTANCE.high, IMPORTANCE.none]).optional(),
-  subTodo: z.array(todoSubSchema.omit({ id: true })).optional(),
+  subTodo: z.array(todoSubSchema).optional(),
   time: TimeSchema.optional(),
   repeat: todoRepeatSchema.optional(),
 })

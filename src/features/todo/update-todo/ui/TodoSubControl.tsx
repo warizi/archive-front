@@ -4,6 +4,7 @@ import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Table, TableBody, TableCell, TableRow } from "@/shared/components/ui/table";
 import { Plus, Trash2 } from "lucide-react";
 import { useCallback, useState } from "react";
+import { TodoSubCheckbox } from "../../complete-todo-sub";
 
 interface TodoSubControlProps {
   values: TodoSubType[];
@@ -70,11 +71,22 @@ function TodoSubControl({
           {values.map((subTodo, index) => (
             <TableRow key={index} className="group hover:bg-inherit">
               <TableCell width={40}>
-                <Checkbox 
-                  checked={subTodo.completed}
-                  className="cursor-pointer"
-                  onCheckedChange={(checked) => updateAt(index, { completed: checked === true })}
-                />
+                {
+                  subTodo?.id ? (
+                    <TodoSubCheckbox 
+                      id={subTodo.id}
+                      parentId={parentId}
+                      completed={subTodo.completed}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <Checkbox 
+                      checked={subTodo.completed}
+                      className="cursor-pointer"
+                      onCheckedChange={(checked) => updateAt(index, { completed: checked === true })}
+                    /> 
+                  )
+                }
               </TableCell>
               <TableCell>
                 <input 

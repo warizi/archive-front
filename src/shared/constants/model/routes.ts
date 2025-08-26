@@ -9,7 +9,7 @@ export const ROUTES_URL = {
   TODO: "/todo",
   TODO_TODAY: "/todo/today",
   TODO_CATEGORY: "/todo/category",
-  TODO_IMPORTANT: "/todo/important",
+  TODO_REPEAT: "/todo/repeat",
   TODO_COMPLETE: "/todo/complete",
   NOT_FOUND: "*",
 };

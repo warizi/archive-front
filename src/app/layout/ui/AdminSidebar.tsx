@@ -43,7 +43,7 @@ function AdminSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"중요한 할 일"} asChild>
-                  <Link to={ROUTES_URL.TODO_IMPORTANT}>
+                  <Link to={ROUTES_URL.TODO_REPEAT}>
                     <Star />
                     <span>
                       중요한 할 일

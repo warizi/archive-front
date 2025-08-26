@@ -1,4 +1,7 @@
 export const TODO_QUERY_KEY = {
   LIST: ["todos"],
-  detail: (id: number) => ["todos", id]
+  CATEGORIZED: (categoryId: number) => ["todos", "category", categoryId],
+  REPEAT: ["todos", "repeat"],
+  REPEAT_CATEGORIZED: (categoryId: number) => ["todos", "repeat", "category", categoryId],
+  detail: (id?: number) => [id]
 };

@@ -7,12 +7,12 @@ import MainSidebar from "./MainSidebar";
 function MainLayout() {
   return (
     <Horizontal className="w-full">
-      <aside>
+      <aside className="shrink-0">
         <MainSidebar />
       </aside>
-      <Vertical className="w-full h-screen">
+      <Vertical className="flex-1 min-w-0 h-screen">
         <Header />
-        <main className="flex-1 p-2">
+        <main className="flex-1 min-w-0 px-4">
           <Outlet />
         </main>
       </Vertical>

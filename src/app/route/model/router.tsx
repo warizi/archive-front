@@ -36,7 +36,7 @@ export const DefaultRouter = createBrowserRouter([
                 { path: ROUTES_URL.HOME, element: <HomePage /> },
                 { path: ROUTES_URL.TODO_TODAY, element: <TodoTodayPage /> },
                 { path: ROUTES_URL.TODO, element: <TodoPage /> },
-                { path: ROUTES_URL.TODO_IMPORTANT, element: <TodoImportantPage /> },
+                { path: ROUTES_URL.TODO_REPEAT, element: <TodoImportantPage /> },
                 { path: ROUTES_URL.TODO_COMPLETE, element: <TodoCompletePage /> },
               ],
           },

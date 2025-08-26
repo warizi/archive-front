@@ -1,7 +1,7 @@
 import { Separator } from "@/shared/components/ui/separator";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/components/ui/sidebar";
 import { ROUTES_URL } from "@/shared/constants";
-import { BookCheck, Calendar, Calendar1, CalendarCheck, Check, Folder, Home, NotepadText, Star } from "lucide-react";
+import { BookCheck, Calendar, Calendar1, CalendarCheck, Check, Folder, Home, NotepadText, Repeat2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfileSidebarFooter from "./ProfileSidebarFooter";
 import WorkSpaceSidebarHeader from "./WorkSpaceSidebarHeader";
@@ -57,10 +57,10 @@ function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"중요한 할 일"} asChild>
-                  <Link to={ROUTES_URL.TODO_IMPORTANT}>
-                    <Star />
+                  <Link to={ROUTES_URL.TODO_REPEAT}>
+                    <Repeat2 />
                     <span>
-                      중요한 할 일
+                      반복 할 일
                     </span>
                   </Link>
                 </SidebarMenuButton>
