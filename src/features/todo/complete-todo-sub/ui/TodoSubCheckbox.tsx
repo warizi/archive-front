@@ -36,9 +36,10 @@ function TodoSubCheckbox({ id, completed, className, parentId }: TodoSubCheckbox
   return (
     <Checkbox
       disabled={isPending}
-      defaultChecked={completed}
+      checked={completed}
       className={className}
       onCheckedChange={handleCompleteChange}
+      aria-label={`하위 할 일 ${completed ? "완료" : "미완료"}: ${id}`}
     />
   );
 };

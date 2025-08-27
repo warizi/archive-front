@@ -10,6 +10,8 @@ import type { TodoSubType, TodoSubWithIdPresent, TodoSubCreateType } from "./mod
 
 import { TODO_QUERY_KEY } from "./model/queryKeys";
 
+import { IMPORTANCE_COLOR } from "./model/ImportanceColor";
+
 export {
   // todo
   Todo,
@@ -39,5 +41,7 @@ export {
   todoSubSchema,
   type TodoSubType,
   type TodoSubWithIdPresent,
-  type TodoSubCreateType
+  type TodoSubCreateType,
+
+  IMPORTANCE_COLOR
 }

@@ -8,11 +8,11 @@ interface CategorizedTodoListProps {
 
 function CategorizedTodoList({ category }: CategorizedTodoListProps) {
   const { data } = useGetCategorizedTodoList({ page: 0, size: 20, sort: "id,desc", id: category.id });
-  const { data: repeatData } = useGetCategorizedRepeatTodoList({ page: 0, size: 20, sort: "id,desc", id: category.id });
+  const { data: repeatData } = useGetCategorizedRepeatTodoList({ id: category.id });
   return (
     <TodoListCard 
       todoList={data?.content || []}
-      repeatTodoList={repeatData?.content || []}
+      repeatTodoList={repeatData?.data || []}
       category={category}
     />
   );

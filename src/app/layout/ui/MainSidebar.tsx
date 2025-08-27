@@ -56,7 +56,7 @@ function MainSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton tooltip={"중요한 할 일"} asChild>
+                <SidebarMenuButton tooltip={"반복 할 일"} asChild>
                   <Link to={ROUTES_URL.TODO_REPEAT}>
                     <Repeat2 />
                     <span>

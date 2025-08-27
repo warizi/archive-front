@@ -5,19 +5,20 @@ import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle } from "@/shared/components/ui/sheet";
 
 interface TodoFormSheetProps {
-  todoId?: number
+  todoId?: number,
+  checkBoxDisabled?: boolean
 }
 
-function TodoFormSheet({ todoId }: TodoFormSheetProps) {
+function TodoFormSheet({ todoId, checkBoxDisabled }: TodoFormSheetProps) {
   const { data } = useGetTodo(todoId);
   return (
-    <SheetContent side="right" className="w-[600px] sm:w-[600px]">
+    <SheetContent side="right" className="min-w-[450px]">
       <SheetHeader>
         <SheetTitle>TODO</SheetTitle>
       </SheetHeader>
       <ScrollArea className="h-[calc(100vh-180px)]">
         <div className="px-4 pb-2">
-        <UpdateTodoForm defaultValues={data?.data}/>
+        <UpdateTodoForm defaultValues={data?.data} checkBoxDisabled={checkBoxDisabled}/>
         </div>
       </ScrollArea>
       <SheetFooter className="sticky bottom-0 left-2 bg-inherit">

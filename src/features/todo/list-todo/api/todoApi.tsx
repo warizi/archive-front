@@ -1,4 +1,4 @@
-import type { TodoWithIdPresent } from "@/entities/todo";
+import type { TODO_REPEAT_FREQUENCY, TodoWithIdPresent } from "@/entities/todo";
 import { apiClient } from "@/shared/config/axiosClient";
 import type { PageRequest } from "@/shared/type/request";
 import type { ApiResponse, PageResponse } from "@/shared/type/response";
@@ -25,11 +25,9 @@ export const getUnCategorizedTodoListApi = async ({ page = 0, size = 20, sort="i
   return response?.data.data;
 }
 
-export const getUnCategorizedRepeatTodoListApi = async ({ page = 0, size = 20, sort="id,desc"}: PageRequest): Promise<PageResponse<TodoWithIdPresent>> => {
-  const response = await apiClient.get<ApiResponse<PageResponse<TodoWithIdPresent>>>("/api/todos/uncategorized/repeat", {
-    params: { page, size, sort }
-  });
-  return response.data.data;
+export const getUnCategorizedRepeatTodoListApi = async (): Promise<ApiResponse<TodoWithIdPresent[]>> => {
+  const response = await apiClient.get<ApiResponse<TodoWithIdPresent[]>>("/api/todos/uncategorized/repeat");
+  return response.data;
 }
 
 export const getCategorizedTodoListApi = async ({ page = 0, size = 20, sort="id,desc", id }: {id:number} & PageRequest): Promise<PageResponse<TodoWithIdPresent>> => {
@@ -40,8 +38,14 @@ export const getCategorizedTodoListApi = async ({ page = 0, size = 20, sort="id,
   return response?.data.data;
 }
 
-export const getCategorizedRepeatTodoListApi = async ({ page = 0, size = 20, sort="id,desc", id }: {id:number} & PageRequest): Promise<PageResponse<TodoWithIdPresent>> => {
-  const response = await apiClient.get<ApiResponse<PageResponse<TodoWithIdPresent>>>(`/api/todos/categorized/${id}/repeat`, {
+export const getCategorizedRepeatTodoListApi = async ({ id }: {id:number}): Promise<ApiResponse<TodoWithIdPresent[]>> => {
+  const response = await apiClient.get<ApiResponse<TodoWithIdPresent[]>>(`/api/todos/categorized/${id}/repeat`);
+
+  return response?.data;
+}
+
+export const getFrequencyRepeatTodoListApi = async ({ page = 0, size = 20, sort="id,desc", frequency }: { frequency: keyof typeof TODO_REPEAT_FREQUENCY } & PageRequest): Promise<PageResponse<TodoWithIdPresent>> => {
+  const response = await apiClient.get<ApiResponse<PageResponse<TodoWithIdPresent>>>(`/api/todos/repeat/${frequency}`, {
     params: { page, size, sort }
   });
 

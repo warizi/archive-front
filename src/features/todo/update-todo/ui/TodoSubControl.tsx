@@ -4,17 +4,19 @@ import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Table, TableBody, TableCell, TableRow } from "@/shared/components/ui/table";
 import { Plus, Trash2 } from "lucide-react";
 import { useCallback, useState } from "react";
-import { TodoSubCheckbox } from "../../complete-todo-sub";
+import { toast } from "sonner";
 
 interface TodoSubControlProps {
   values: TodoSubType[];
   onChange: (values: TodoSubType[]) => void;
   parentId: number;
+  checkBoxDisabled?: boolean;
 }
 function TodoSubControl({
   values,
   onChange,
   parentId,
+  checkBoxDisabled = false
 }: TodoSubControlProps) {
   const [ newSubTodo, setNewSubTodo ] = useState<string>("");
 
@@ -25,6 +27,10 @@ function TodoSubControl({
   const add = useCallback(
     () => {
       if (!newSubTodo.trim()) return;
+      if (values.filter((it) => it.title === newSubTodo.trim()).length > 0) {
+        toast.error("이미 존재하는 세부 할 일입니다.");
+        return;
+      }
       setNewSubTodo("");
       onChange([...values, { title: newSubTodo.trim(), completed: false, order: values.length, parentId: parentId }])
     },
@@ -69,24 +75,15 @@ function TodoSubControl({
             </TableCell>
           </TableRow>
           {values.map((subTodo, index) => (
-            <TableRow key={index} className="group hover:bg-inherit">
+            <TableRow key={`${index}-${subTodo.id}`} className="group hover:bg-inherit">
               <TableCell width={40}>
-                {
-                  subTodo?.id ? (
-                    <TodoSubCheckbox 
-                      id={subTodo.id}
-                      parentId={parentId}
-                      completed={subTodo.completed}
-                      className="cursor-pointer"
-                    />
-                  ) : (
-                    <Checkbox 
-                      checked={subTodo.completed}
-                      className="cursor-pointer"
-                      onCheckedChange={(checked) => updateAt(index, { completed: checked === true })}
-                    /> 
-                  )
-                }
+                {!checkBoxDisabled && (
+                  <Checkbox 
+                    checked={subTodo.completed}
+                    className="cursor-pointer"
+                    onCheckedChange={(checked) => updateAt(index, { completed: checked === true })}
+                  /> 
+                )}
               </TableCell>
               <TableCell>
                 <input 

@@ -3,12 +3,12 @@ import TodoListCard from "./TodoListCard";
 
 function UnCategorizedTodoList() {
   const { data } = useGetUnCategorizedTodoList({ page: 0, size: 100, sort: "id,desc" });
-  const { data: repeatData } = useGetUnCategorizedRepeatTodoList({ page: 0, size: 100, sort: "id,desc" });
+  const { data: repeatData } = useGetUnCategorizedRepeatTodoList();
 
   return (
     <TodoListCard
       todoList={data?.content || []}
-      repeatTodoList={repeatData?.content || []}
+      repeatTodoList={repeatData?.data || []}
     />
   );
 };

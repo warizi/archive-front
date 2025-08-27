@@ -4,7 +4,8 @@ import {
   useGetTodoList, 
   useGetCategorizedTodoList,
   useGetCategorizedRepeatTodoList,
-  useGetUnCategorizedRepeatTodoList
+  useGetUnCategorizedRepeatTodoList,
+  useGetFrequencyRepeatTodoList
 } from "./model/todoApiHooks";
 
 export {
@@ -13,5 +14,6 @@ export {
   useGetTodoList,
   useGetCategorizedTodoList,
   useGetCategorizedRepeatTodoList,
-  useGetUnCategorizedRepeatTodoList
+  useGetUnCategorizedRepeatTodoList,
+  useGetFrequencyRepeatTodoList
 }

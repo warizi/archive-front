@@ -17,19 +17,38 @@ interface TodoListCardProps {
   category?: CategoryWithIdPresent;
 }
 
+const importanceOrder = new Map<string, number>([
+  ["high", 3],
+  ["medium", 2],
+  ["low", 1],
+  ["none", 0]
+]);
+
 function TodoListCard({ todoList, repeatTodoList, category }: TodoListCardProps) {
-  const sortedCompletedList = todoList.sort((a, b) => {
-    return (b.completed ? 0 : 1) - (a.completed ? 0 : 1);
+
+  const sortedTodoList = todoList.sort((a, b) => {
+    return (importanceOrder.get(b?.importance || "none") || 0) - (importanceOrder.get(a.importance || "none") || 0);
   });
 
+  const sortedCompletedList = sortedTodoList.sort((a, b) => {
+    return (b.completed ? 0 : 1) - (a.completed ? 0 : 1);
+  });
+  
   return (
-    <Card className="p-2 gap-1 w-[350px] max-h-[calc(100vh-110px)]">
-      <CardHeader className="p-2">
-        <CardTitle>
-          {category ? <div className="flex items-center gap-2"><CategoryTag size={20} category={category} /><span>{category.name}</span></div> : "미분류"}
+    <Card className="p-2 gap-1 min-w-[350px] w-[350px] max-h-[calc(100vh-110px)]">
+      <CardHeader className="p-2 w-full">
+        <CardTitle className="max-w-[300px]">
+          {category ? (
+            <div className="flex items-center gap-2">
+              <div className="shrink-0">
+                <CategoryTag size={20} category={category}/>
+              </div>
+              <span className="flex-1 min-w-0 truncate">{category.name}</span>
+            </div>
+          ) : "미분류"}
         </CardTitle>
-        {
-          category?.description && (
+          {
+            category?.description && (
             <CardDescription>
               {category.description}
             </CardDescription>
@@ -42,7 +61,7 @@ function TodoListCard({ todoList, repeatTodoList, category }: TodoListCardProps)
           {
             repeatTodoList && repeatTodoList?.length > 0 && (
               <>
-                <Collapsible className="mb-2">
+                <Collapsible className="mb-2" defaultOpen={true}>
                   <div className="flex w-[332px] items-center justify-between gap-4 px-2 pl-4">
                     <h4 className="text-sm font-semibold">
                       반복 할 일
@@ -57,7 +76,7 @@ function TodoListCard({ todoList, repeatTodoList, category }: TodoListCardProps)
                   <CollapsibleContent>
                     <div className="space-y-1">
                       {repeatTodoList.map(todo => (
-                        <TodoRow key={todo.id} todo={todo} sheetDisabled={true} />
+                        <TodoRow key={todo.id} todo={todo} sheetDisabled={true} deleteDisabled={true} />
                       ))}
                     </div>
                   </CollapsibleContent>

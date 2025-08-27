@@ -2,15 +2,16 @@ import { IMPORTANCE } from "@/entities/todo";
 import { Badge } from "@/shared/components/ui/badge";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 
+
 interface ImportanceSelectProps {
-  selectedImportance: string | undefined;
-  onImportanceChange: (importance?: string) => void;
+  selectedImportance: string | undefined | null;
+  onImportanceChange: (importance?: string | null) => void;
 }
 
 function ImportanceSelect({ selectedImportance, onImportanceChange }: ImportanceSelectProps) {
 
-  const handleOnImportanceChange = (value: string) => {
-    onImportanceChange(value);
+  const handleOnImportanceChange = (value?: string) => {
+    onImportanceChange(value || null);
   };
 
   return (
@@ -25,17 +26,17 @@ function ImportanceSelect({ selectedImportance, onImportanceChange }: Importance
             <SelectItem
               value={undefined}
             >
-              선택 안함
+              선택 안함 
             </SelectItem>
           )}
           <SelectItem value={IMPORTANCE.low} >
-            <Badge className="bg-emerald-300 px-3">낮음</Badge>
+            <Badge className={`bg-importance-low border-2 border-importance-border-low px-3`}>낮음</Badge>
           </SelectItem>
           <SelectItem value={IMPORTANCE.medium}>
-            <Badge className="bg-yellow-300 px-3">보통</Badge>
+            <Badge className={`bg-importance-medium border-2 border-importance-border-medium px-3`}>보통</Badge>
           </SelectItem>
           <SelectItem value={IMPORTANCE.high}>
-            <Badge className="bg-red-300 px-3">높음</Badge>
+            <Badge className={`bg-importance-high border-2 border-importance-border-high px-3`}>높음</Badge>
           </SelectItem>
         </SelectGroup>
     </SelectContent>

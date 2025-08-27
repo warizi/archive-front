@@ -19,6 +19,7 @@ import { useDebouncedAutosave } from "../model/UseDebouncedAutoSave";
 
 interface UpdateTodoFormProps {
   defaultValues?: TodoWithIdPresent;
+  checkBoxDisabled?: boolean;
 }
 
 const TABS = {
@@ -26,12 +27,12 @@ const TABS = {
   REPEAT: '반복',
 }
 
-function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
+function UpdateTodoForm({ defaultValues, checkBoxDisabled = false }: UpdateTodoFormProps) {
   const form = useForm<TodoWithIdPresent>({
     resolver: zodResolver(todoSchema.required({ id: true })),
-   defaultValues: {
-     id: 1, title: "", description: "", completed: false, ...defaultValues,
-   },
+    defaultValues: {
+      id: 1, title: "", description: "", completed: false, ...defaultValues,
+    },
   });
 
   
@@ -68,16 +69,26 @@ function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4" id={UPDATE_TODO_FORM_ID}>
-        <div className="flex gap-4 items-center">
-          <Checkbox
-            checked={form.watch("completed")}
-            onCheckedChange={(checked) => form.setValue("completed", checked === true)}
-          />
+        <div className="flex gap-4 items-center w-full">
+          {
+            !checkBoxDisabled && (
+              <FormField
+                control={form.control}
+                name="completed"
+                render={({ field }) => (
+                  <Checkbox
+                    checked={!!field.value}
+                    onCheckedChange={(next) => field.onChange(next === true)}
+                  />
+                )}
+              />
+            )
+          }
           <FormField
             control={control}
             name="title"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormControl>
                   <input {...field} placeholder="할 일 제목을 입력하세요." className="outline-none border-none w-full font-bold" />
                 </FormControl>
@@ -88,17 +99,18 @@ function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
             )}
           />
         </div>
-        <div className="flex justify-between gap-2">
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-2">
           <FormField 
             control={control}
             name="category"
             render={({ field }) => (
-              <FormItem className="flex-1/2">
+              <FormItem className="w-full">
                 <FormLabel>카테고리</FormLabel>
                 <FormControl>
-                  <CategorySelect 
-                    selectedCategory={field.value || undefined} 
-                    onCategoryChange={field.onChange} className="w-[172px]"
+                  <CategorySelect
+                    selectedCategory={field.value || undefined}
+                    onCategoryChange={field.onChange} 
+                    className="w-[200px]"
                   />
                 </FormControl>
               </FormItem>
@@ -108,7 +120,7 @@ function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
             control={control}
             name="importance"
             render={({ field }) => (
-              <FormItem className="flex-1/2">
+              <FormItem className="">
                 <FormLabel>중요도</FormLabel>
                 <FormControl>
                   <ImportanceSelect
@@ -131,6 +143,7 @@ function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
                   values={field.value || []}
                   onChange={field.onChange}
                   parentId={form.watch("id")}
+                  checkBoxDisabled={checkBoxDisabled}
                 />
               </FormControl>
               <FormMessage>
@@ -163,7 +176,9 @@ function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
             <Card>
               <CardHeader>
                 <CardTitle>기간 설정</CardTitle>
-                <CardDescription>시작일과 종료일을 설정합니다.</CardDescription>
+                <CardDescription>
+                  기간이 설정된 할 일은 일정으로 등록됩니다.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <PeriodControl />
@@ -178,7 +193,9 @@ function UpdateTodoForm({ defaultValues }: UpdateTodoFormProps) {
             <Card>
               <CardHeader>
                 <CardTitle>반복 설정</CardTitle>
-                <CardDescription>할 일의 반복 주기를 설정합니다.</CardDescription>
+                <CardDescription>
+                  설정되면 반복 할 일 페이지에서 관리하실 수 있습니다.
+                </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
                 <FormField 

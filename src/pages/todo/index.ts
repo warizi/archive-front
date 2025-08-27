@@ -1,11 +1,11 @@
 import TodoPage from "./ui/TodoPage";
 import TodoTodayPage from "./ui/TodoTodayPage";
-import TodoImportantPage from "./ui/TodoImportantPage";
+import TodoRepeatPage from "./ui/TodoRepeatPage";
 import TodoCompletePage from "./ui/TodoCompletePage";
 
 export {
   TodoPage,
   TodoTodayPage,
-  TodoImportantPage,
+  TodoRepeatPage,
   TodoCompletePage
 };
