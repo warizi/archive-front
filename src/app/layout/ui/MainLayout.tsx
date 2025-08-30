@@ -12,7 +12,7 @@ function MainLayout() {
       </aside>
       <Vertical className="flex-1 min-w-0 h-screen">
         <Header />
-        <main className="flex-1 min-w-0 px-4">
+        <main className="flex-1 min-w-0 px-4 pb-4 h-[calc(100vh-64px)] overflow-scroll">
           <Outlet />
         </main>
       </Vertical>

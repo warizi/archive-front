@@ -1,7 +1,9 @@
+import { TimeBlock } from "@/shared/components/ui/timeLine";
 
 function TodoTodayPage() {
   return (
-    <div>
+    <div className="flex justify-center">
+      <TimeBlock />
     </div>
   );
 };

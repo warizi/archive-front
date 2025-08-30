@@ -1,6 +1,7 @@
 import type { AxiosError, AxiosInstance, AxiosRequestHeaders, InternalAxiosRequestConfig } from "axios";
 import axios from "axios";
 import { tokenStore } from "./tokenStore";
+import { workspaceStore } from "./workspaceStore";
 
 const API_BASE_URL = "http://localhost:8080";
 
@@ -47,9 +48,14 @@ function isAuthPath(url?: string) {
 
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const at = tokenStore.getAccess();
+  const wsId = workspaceStore.get();
   if (at) {
     config.headers = config.headers || {};
     (config.headers as AxiosRequestHeaders).Authorization = `Bearer ${at}`;
+  }
+  if (wsId) {
+    config.headers = config.headers || {};
+    config.headers["X-Workspace-Id"] = wsId;
   }
   return config;
 });

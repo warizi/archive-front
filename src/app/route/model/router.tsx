@@ -8,6 +8,7 @@ import { LoginPage, LogoutPage, SignupPage } from "@/pages/auth";
 import AdminLayout from "@/app/layout/ui/AdminLayout";
 import { AdminDashboardPage } from "@/pages/admin";
 import { TodoCompletePage, TodoRepeatPage, TodoPage, TodoTodayPage } from "@/pages/todo";
+import ProtectedWorkspaceRoute from "./ProtectedWorkspaceRoute";
 
 export const DefaultRouter = createBrowserRouter([
 
@@ -27,27 +28,33 @@ export const DefaultRouter = createBrowserRouter([
     path: ROUTES_URL.HOME,
     element: <ProtectedRoute />, // 인증 필요
     children: [
-      { // user page
-        element: <RoleRoute requiredRoles={[ROLE.USER]} />,
+      {
+        path: ROUTES_URL.HOME,
+        element: <ProtectedWorkspaceRoute />,
         children: [
-          {
-            element: <MainLayout />, // 동일 레이아웃 사용
-              children: [
-                { path: ROUTES_URL.HOME, element: <HomePage /> },
-                { path: ROUTES_URL.TODO_TODAY, element: <TodoTodayPage /> },
-                { path: ROUTES_URL.TODO, element: <TodoPage /> },
-                { path: ROUTES_URL.TODO_REPEAT, element: <TodoRepeatPage /> },
-                { path: ROUTES_URL.TODO_COMPLETE, element: <TodoCompletePage /> },
-              ],
+          { // user page
+            element: <RoleRoute requiredRoles={[ROLE.USER]} />,
+            children: [
+              {
+                element: <MainLayout />, // 동일 레이아웃 사용
+                  children: [
+                    { path: ROUTES_URL.HOME, element: <HomePage /> },
+                    { path: ROUTES_URL.TODO_TODAY, element: <TodoTodayPage /> },
+                    { path: ROUTES_URL.TODO, element: <TodoPage /> },
+                    { path: ROUTES_URL.TODO_REPEAT, element: <TodoRepeatPage /> },
+                    { path: ROUTES_URL.TODO_COMPLETE, element: <TodoCompletePage /> },
+                  ],
+              },
+            ],
           },
-        ],
-      },
-      { // admin page
-        element: <RoleRoute requiredRoles={[ROLE.ADMIN]} />,
-        children: [
-          {
-            element: <AdminLayout />,
-            children: [{ path: ROUTES_URL.ADMIN, element: <AdminDashboardPage /> }],
+          { // admin page
+            element: <RoleRoute requiredRoles={[ROLE.ADMIN]} />,
+            children: [
+              {
+                element: <AdminLayout />,
+                children: [{ path: ROUTES_URL.ADMIN, element: <AdminDashboardPage /> }],
+              }
+            ]
           }
         ]
       }

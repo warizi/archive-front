@@ -8,7 +8,7 @@ import {
 import { restrictToVerticalAxis, restrictToHorizontalAxis } from "@dnd-kit/modifiers";
 import { verticalListSortingStrategy, horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import { SortableContext } from "@dnd-kit/sortable";
-import { useDnD } from "../model/useDnD";
+import { useDnD } from "./hooks/useDnD";
 
 type Axis = "vertical" | "horizontal";
 

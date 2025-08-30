@@ -83,7 +83,7 @@ function ProfileSidebarFooter() {
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer">
                 <LogOut />
-                <Link to={ROUTES_URL.LOGOUT}>
+                <Link to={ROUTES_URL.LOGOUT} className="w-full">
                   로그아웃
                 </Link>
               </DropdownMenuItem>

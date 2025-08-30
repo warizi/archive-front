@@ -5,6 +5,7 @@ import TodoRow from "./TodoRow";
 import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { useCategoryFilter } from "@/features/category";
 import { UNCATEGORIZED_ID } from "@/features/category/model/contants";
+import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard";
 interface RepeatTodoListCardProps {
   repeatFrequency: keyof typeof TODO_REPEAT_FREQUENCY;
 }
@@ -50,6 +51,9 @@ function RepeatTodoListCard({ repeatFrequency }: RepeatTodoListCardProps) {
     </CardHeader>
     <CardContent className="p-0 pb-2 flex-1 min-h-0 flex flex-col">
       <ScrollArea className="flex-1 h-full mt-2">
+        {filteredData.length === 0 && (
+          <EmptyMessageCard message="반복 할 일이 없습니다. 할 일 목록에서 추가해보세요." />
+        )}
         {filteredData.map(todo => (
           <TodoRow key={todo.id} todo={todo} sheetDisabled={false} checkBoxDisabled={true} />
         ))}

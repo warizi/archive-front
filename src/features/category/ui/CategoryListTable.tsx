@@ -9,9 +9,9 @@ import { toast } from "sonner";
 import axios from "axios";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { ScrollArea } from "@/shared/components/ui/scroll-area";
-import SortableDndContext from "@/shared/components/ui/SorableDndContext";
+import SortableDndContext from "@/shared/components/ui/dnd/SorableDndContext";
 import type { CategoryWithIdPresent } from "@/entities/catogory/model/Category";
-import DraggableWrapper from "@/shared/components/ui/DraggableWrapper";
+import DraggableWrapper from "@/shared/components/ui/dnd/DraggableWrapper";
 import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard";
 
 interface CategoryListTableProps {
