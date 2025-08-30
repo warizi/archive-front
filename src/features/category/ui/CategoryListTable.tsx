@@ -1,7 +1,7 @@
 import { CategoryTag, type CategoryType } from "@/entities/catogory";
 import { Table, TableBody, TableCell, TableRow } from "@/shared/components/ui/table";
 import { useDeleteCategoryMutation, useGetCategoryListQuery, useUpdateCategoryOrdersMutation } from "../model/categoryApiHooks";
-import { Trash2 } from "lucide-react";
+import { GripHorizontal, Trash2 } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { AppPagination } from "@/shared/components/ui/AppPagination";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import SortableDndContext from "@/shared/components/ui/dnd/SorableDndContext";
 import type { CategoryWithIdPresent } from "@/entities/catogory/model/Category";
 import DraggableWrapper from "@/shared/components/ui/dnd/DraggableWrapper";
 import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard";
+import { DraggableHandle } from "@/shared/components/ui/dnd/DraggableHandle";
 
 interface CategoryListTableProps {
   selectedCategory: CategoryType | null
@@ -129,9 +130,9 @@ function CategoryListTable({
                                   selected={selectedCategory?.id === category.id} 
                                   className="cursor-pointer group"
                                 >
-                                  <TableCell width={50}>
-                                    <CategoryTag category={category}/>
-                                  </TableCell>
+                                    <TableCell width={50}>
+                                      <CategoryTag category={category}/>
+                                    </TableCell>
                                   <TableCell
                                     onClick={() => handleSelect(category)} 
                                   >
@@ -161,6 +162,11 @@ function CategoryListTable({
                                           />
                                         </Button>
                                       </AlertDialogTrigger>
+                                  </TableCell>
+                                  <TableCell width={20}>
+                                    <DraggableHandle itemId={category.id}>
+                                      <GripHorizontal opacity={0.5} className="group-hover:opacity-100"/>
+                                    </DraggableHandle>
                                   </TableCell>
                                 </TableRow>
                               </DraggableWrapper>

@@ -1,7 +1,6 @@
 import React from "react";
 import { useDraggableItem } from "./hooks/useDraggableItem";
-import { Slot } from "@radix-ui/react-slot";
-import { DraggableContext } from "./DraggableContext";
+import { Slot } from "@radix-ui/react-slot"
 
 type DraggableWrapperProps = {
   id: number;
@@ -18,7 +17,7 @@ function DraggableWrapper({
   asChild,
   ...rest
 }: DraggableWrapperProps) {
-  const { ref, style, listeners, attributes, isDragging } = useDraggableItem(id);
+  const { ref, style, isDragging } = useDraggableItem(id);
 
   const Comp = asChild ? Slot : "div";
 
@@ -42,9 +41,7 @@ function DraggableWrapper({
       className={className}
       {...rest}
     >
-      <DraggableContext.Provider value={{ listeners, attributes }}>
-        {children}
-      </DraggableContext.Provider>
+      {children}
     </Comp>
   );
 }
