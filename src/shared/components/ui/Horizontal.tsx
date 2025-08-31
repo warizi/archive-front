@@ -7,12 +7,12 @@ interface HorizontalProps {
   children?: React.ReactNode;
 }
 
-function Horizontal({ justify, align, className = "", children }: HorizontalProps) {
+function Horizontal({ justify, align, className = "", children, ...rest }: HorizontalProps & React.HTMLProps<HTMLDivElement>) {
   const justifyClass = justify ? JUSTIFY_MAP[justify] : "";
   const alignClass = align ? ALIGN_MAP[align] : "";
 
   return (
-    <div className={`flex flex-row ${justifyClass} ${alignClass} ${className}`}>
+    <div className={`flex flex-row ${justifyClass} ${alignClass} ${className}`} {...rest}>
       {children}
     </div>
   );

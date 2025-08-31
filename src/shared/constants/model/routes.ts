@@ -12,4 +12,6 @@ export const ROUTES_URL = {
   TODO_REPEAT: "/todo/repeat",
   TODO_COMPLETE: "/todo/complete",
   NOT_FOUND: "*",
+  // note
+  NOTE: "/note",
 };

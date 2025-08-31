@@ -9,6 +9,7 @@ import AdminLayout from "@/app/layout/ui/AdminLayout";
 import { AdminDashboardPage } from "@/pages/admin";
 import { TodoCompletePage, TodoRepeatPage, TodoPage, TodoTodayPage } from "@/pages/todo";
 import ProtectedWorkspaceRoute from "./ProtectedWorkspaceRoute";
+import { NotePage } from "@/pages/note";
 
 export const DefaultRouter = createBrowserRouter([
 
@@ -43,6 +44,7 @@ export const DefaultRouter = createBrowserRouter([
                     { path: ROUTES_URL.TODO, element: <TodoPage /> },
                     { path: ROUTES_URL.TODO_REPEAT, element: <TodoRepeatPage /> },
                     { path: ROUTES_URL.TODO_COMPLETE, element: <TodoCompletePage /> },
+                    { path: ROUTES_URL.NOTE, element: <NotePage /> }
                   ],
               },
             ],

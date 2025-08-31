@@ -86,7 +86,7 @@ function MainSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"전체 노트"} asChild>
-                  <Link to={"#"}>
+                  <Link to={ROUTES_URL.NOTE}>
                     <NotepadText />
                     <span>
                       전체 노트
