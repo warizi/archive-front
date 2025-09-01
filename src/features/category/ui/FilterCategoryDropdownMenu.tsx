@@ -5,6 +5,7 @@ import { Filter } from "lucide-react";
 import { CategoryTag } from "@/entities/catogory";
 import { useCategoryFilter } from "../model/useCategoryFilter";
 import { UNCATEGORIZED_ID } from "../model/contants";
+import Horizontal from "@/shared/components/ui/Horizontal";
 
 function FilterCategoryDropdownMenu() {
   const { data } = useGetCategoryListQuery({
@@ -14,6 +15,7 @@ function FilterCategoryDropdownMenu() {
   });
 
   const { 
+    selectedCategories,
     isSelectedCategory, 
     addSelectedCategory, 
     removeSelectedCategory, 
@@ -32,32 +34,39 @@ function FilterCategoryDropdownMenu() {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant={"ghost"}>
-          <Filter />
-          카테고리 필터
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-2">
-        <DropdownMenuLabel>카테고리 선택</DropdownMenuLabel>
-        <DropdownMenuCheckboxItem
-          checked={isSelectedCategory(UNCATEGORIZED_ID)}
-          onCheckedChange={() => handleSelectCategoryChange(UNCATEGORIZED_ID)}
-        >
-          미분류
-        </DropdownMenuCheckboxItem>
-        {data?.content?.map(category => (
-          <DropdownMenuCheckboxItem key={category.id}
-            checked={isSelectedCategory(category.id)}
-            onCheckedChange={() => handleSelectCategoryChange(category.id)}
+    <Horizontal align="center">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant={"ghost"}>
+            <Filter />
+            카테고리 필터
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="p-2">
+          <DropdownMenuLabel>카테고리 선택</DropdownMenuLabel>
+          <DropdownMenuCheckboxItem
+            checked={isSelectedCategory(UNCATEGORIZED_ID)}
+            onCheckedChange={() => handleSelectCategoryChange(UNCATEGORIZED_ID)}
           >
-            <CategoryTag category={category} />
-            {category.name}
+            미분류
           </DropdownMenuCheckboxItem>
+          {data?.content?.map(category => (
+            <DropdownMenuCheckboxItem key={category.id}
+              checked={isSelectedCategory(category.id)}
+              onCheckedChange={() => handleSelectCategoryChange(category.id)}
+            >
+              <CategoryTag category={category} />
+              {category.name}
+            </DropdownMenuCheckboxItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <Horizontal className="gap-1">
+        {selectedCategories.length > 0 && data?.content?.filter(category => selectedCategories.includes(category.id)).map(category => (
+          <CategoryTag key={category.id} category={category} />
         ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </Horizontal>
+    </Horizontal>
   );
 };
 
