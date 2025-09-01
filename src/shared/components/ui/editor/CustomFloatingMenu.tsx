@@ -153,7 +153,7 @@ function CustomFloatingMenu(
       ) {
         if (
           isShow &&
-          (event.key === "Enter" || event.key === "Escape")
+          (event.key === "Enter" || event.key === "Escape" || event.key === "ArrowUp" || event.key === "ArrowDown")
         ) {
           onKeydown(event); // 우리의 키 처리 로직 추가
           return true; // ProseMirror 기본 동작 방지
