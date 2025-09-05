@@ -3,9 +3,9 @@ import { RepeatTodoListCardList, TodoFilterHead } from "@/widgets/todo";
 
 function TodoRepeatPage() {
   return (
-    <Vertical className="h-[calc(100vh-64px)]">
+    <Vertical className="h-screen-no-header px-4">
       <TodoFilterHead />
-      <div className="flex h-[calc(100vh-114px)] flex-1 gap-4 overflow-x-scroll min-w-0">
+      <div className="flex h-[calc(100vh-94px)] flex-1 gap-4 overflow-x-scroll min-w-0">
         <RepeatTodoListCardList />
       </div>
     </Vertical>

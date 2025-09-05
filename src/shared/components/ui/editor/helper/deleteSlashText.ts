@@ -6,7 +6,6 @@ export const deleteSlashText = (editor: Editor) => {
   const lineStart = $from.start(); // 현재 줄의 시작 위치
   const lineEnd = $from.end(); // 현재 줄의 끝 위치
   
-  console.log($from.parent.textContent);
   // 줄 전체 삭제
   editor.commands.deleteRange({
     from: lineStart, // 현재 줄의 시작 위치

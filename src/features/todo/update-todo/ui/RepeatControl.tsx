@@ -45,7 +45,6 @@ function RepeatControl({ parentId, repeat, onRepeatChange }: RepeatControlProps)
       date
     });
   };
-  console.log(repeat)
   return (
     <div className="flex flex-col gap-2">
       <ToggleGroup type="single" variant={"outline"} value={repeat?.frequency ?? ""} onValueChange={handleRepeatChange}>

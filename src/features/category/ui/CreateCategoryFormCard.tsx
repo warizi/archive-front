@@ -8,7 +8,6 @@ function CreateCategoryFormCard() {
   const { mutate } = useCreateCategoryMutation();
 
   const onSubmit = (data: CategoryType) => {
-    console.log(data)
     mutate(data, {
       onSuccess: () => {
         toast.success(`카테고리가 추가되었습니다.`, {

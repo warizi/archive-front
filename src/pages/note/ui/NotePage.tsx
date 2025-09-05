@@ -1,12 +1,20 @@
-import Tiptap from "@/shared/components/ui/editor/Tiptap";
-import { useState } from "react";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/shared/components/resizable";
+import { NoteFolderSidebar } from "@/widgets/note";
 
 function NotePage() {
-  const [ jsonValue, setJsonValue ] = useState("");
   return (
-    <div>
-      <Tiptap value={jsonValue} onChange={setJsonValue} />
-    </div>
+    <ResizablePanelGroup 
+      className="min-h-screen-no-header"
+      direction="horizontal"
+    >
+      <ResizablePanel minSize={15} defaultSize={20} className="bg-card-secondary">
+        <NoteFolderSidebar />
+      </ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel minSize={60} defaultSize={80}>
+
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 };
 

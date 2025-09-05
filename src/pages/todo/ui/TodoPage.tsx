@@ -6,9 +6,9 @@ import { CategorizedTodoListsMapper, TodoFilterHead, UnCategorizedTodoList } fro
 function TodoPage() {
   const { selectedCategories } = useCategoryFilter();
   return (
-    <Vertical className="h-[calc(100vh-64px)]">
+    <Vertical className="h-screen-no-header px-4">
       <TodoFilterHead />
-      <div className="flex h-[calc(100vh-114px)] flex-1 gap-4 overflow-auto min-w-0">
+      <div className="flex h-[calc(100vh-94px)] flex-1 gap-4 overflow-auto min-w-0">
         {
           selectedCategories.includes(UNCATEGORIZED_ID) && (
             <UnCategorizedTodoList />

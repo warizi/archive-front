@@ -14,7 +14,7 @@ function App() {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <SidebarProvider>
           <RouterProvider router={DefaultRouter}/>
-          <Toaster />
+          <Toaster richColors position="top-right" />
         </SidebarProvider>
       </ThemeProvider>
     </QueryClientProvider>
