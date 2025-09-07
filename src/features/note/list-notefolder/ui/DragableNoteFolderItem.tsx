@@ -4,8 +4,21 @@ import Horizontal from "@/shared/components/ui/Horizontal";
 import { useDndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import NoteFolderContextMenu from "./NoteFolderContextMenu";
 import { Folder } from "lucide-react";
+import { cn } from "@/shared/lib/utils";
 
-export default function DraggableNotefolderItem({ item, isAnyDragging }: { item: NoteFolderWithIdPresent, isAnyDragging?: boolean }) {
+export interface DraggableNoteFolderItemProps {
+  item: NoteFolderWithIdPresent;
+  selectedFolder?: NoteFolderWithIdPresent | null;
+  onClick?: (folder: NoteFolderWithIdPresent) => void;
+  isAnyDragging?: boolean;
+}
+
+export default function DraggableNotefolderItem({ 
+  item, 
+  isAnyDragging, 
+  onClick,
+  selectedFolder
+}: DraggableNoteFolderItemProps) {
   const {
     attributes, 
     listeners, 
@@ -56,31 +69,42 @@ export default function DraggableNotefolderItem({ item, isAnyDragging }: { item:
               {...attributes}
               {...listeners}
         >
-          <div
-            className={`pl-${depth * 4} relative h-8 hover:bg-muted w-full rounded-md px-2 pt-1 cursor-pointer ${over?.id === `droppable-inside-${item.id}` ? "bg-muted" : ""}`}
-          >
-            <NoteFolderContextMenu noteFolder={item} asChild>
+          <NoteFolderContextMenu noteFolder={item} asChild>
+            <div
+              className={cn(
+                `relative h-8 hover:bg-muted w-full rounded-md px-2 pt-[6px] cursor-pointer ${over?.id === `droppable-inside-${item.id}` ? "bg-muted" : ""}`,
+                { 'bg-muted': selectedFolder?.id === item.id }
+              )}
+              style={{
+                paddingLeft: `${depth * 12 + 8}px`
+              }}
+              onClick={() => onClick && onClick(item)}
+            >
               <Horizontal justify="between" className="w-full gap-2">
-                <Horizontal align="center" className="gap-2 w-full overflow-hidden">
+                <Horizontal align="center" className="gap-2 w-full overflow-hidden" >
                   <Folder size={16} className="shrink-0"/>
                   <span className="truncate text-sm">
                     {name}
                   </span>
                 </Horizontal>
-                {child && child.length > 0 && <AccordionTrigger className="p-0 px-1 m-0 cursor-pointer" />}
+                {child && child.length > 0 && <AccordionTrigger className="p-0 px-1 m-0 cursor-pointer" onClick={(e) => e.stopPropagation()} />}
               </Horizontal>
-            </NoteFolderContextMenu>
-          </div>
+            </div>
+          </NoteFolderContextMenu>
           {child && child.length > 0 && (
-            <AccordionContent className="pb-2">
+            <AccordionContent className="pt-1 pb-0">
               {/* <div> */}
                 {child.map((subItem) => (
-                  <DraggableNotefolderItem key={subItem.id} item={subItem} isAnyDragging={isAnyDragging} />
+                  <DraggableNotefolderItem key={subItem.id} item={subItem} isAnyDragging={isAnyDragging} onClick={onClick} selectedFolder={selectedFolder} />
                 ))}
               {/* </div> */}
             </AccordionContent>
           )}
-          <div className={`ml-${item.depth * 4} h-1 ${over?.id === `droppable-bottom-${item.id}` ? "bg-muted" : ""}`}/>
+          <div className={`h-1 ${over?.id === `droppable-bottom-${item.id}` ? "bg-muted" : ""}`}
+            style={{
+              marginLeft: `${depth * 12 + 8}px`
+            }}
+          />
            {
               isAnyDragging && (
                 <>

@@ -17,9 +17,10 @@ interface TodoRowProps {
   sheetDisabled: boolean;
   checkBoxDisabled?: boolean; // true면 체크박스 숨김 (완료된 할 일 등)
   deleteDisabled?: boolean; // true면 삭제 버튼 숨김 (반복 할 일 등)
+  categoryTagDisplay?: boolean; // categoryTag 표시 여부, 기본값 true
 }
 
-function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled }: TodoRowProps) {
+function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled, categoryTagDisplay = true }: TodoRowProps) {
   const [ isOpen, setIsOpen ] = useState(false);
 
   const queryClient = useQueryClient();
@@ -44,7 +45,7 @@ function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled }: Todo
                 aria-describedby={`todo-desc-${todo.id}`}
                 className="flex-1 min-w-0"
               >
-              <Todo data={todo} className="w-full overflow-hidden"/>
+              <Todo data={todo} className="w-full overflow-hidden" categoryTagDisplay={categoryTagDisplay} />
               </div>
             </SheetTrigger>
             {/* form */}

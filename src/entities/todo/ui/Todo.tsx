@@ -10,9 +10,10 @@ interface TodoProps {
   data: TodoWithIdPresent
   onClick?: (todo: TodoWithIdPresent) => void;
   className?: string;
+  categoryTagDisplay?: boolean; // categoryTag 표시 여부, 기본값 true
 }
 
-function Todo({ data, onClick, className }: TodoProps) {
+function Todo({ data, onClick, className, categoryTagDisplay = true }: TodoProps) {
 
   const importanceColor =
     data.importance === "high" ? IMPORTANCE_COLOR.high
@@ -26,7 +27,7 @@ function Todo({ data, onClick, className }: TodoProps) {
           className={cn(`flex flex-row gap-2 min-h-[35px] pl-2 cursor-pointer`, className)} 
           onClick={() => onClick?.(data)}
         >
-          {data?.category && (
+          {categoryTagDisplay && data?.category && (
             <div className="shrink-0 pt-2">
               <CategoryTag category={data.category} />
             </div>

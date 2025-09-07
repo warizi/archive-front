@@ -1,20 +1,24 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/shared/components/resizable";
-import { NoteFolderSidebar } from "@/widgets/note";
+import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard";
+import Vertical from "@/shared/components/ui/Vertical";
+import { NoteListInFolderPannel, ResizableBoxWithNoteFolderSidebar } from "@/widgets/note";
 
 function NotePage() {
   return (
-    <ResizablePanelGroup 
-      className="min-h-screen-no-header"
-      direction="horizontal"
-    >
-      <ResizablePanel minSize={15} defaultSize={20} className="bg-card-secondary">
-        <NoteFolderSidebar />
-      </ResizablePanel>
-      <ResizableHandle />
-      <ResizablePanel minSize={60} defaultSize={80}>
-
-      </ResizablePanel>
-    </ResizablePanelGroup>
+    <ResizableBoxWithNoteFolderSidebar>
+      {(selectedFolder, setSelectedFolder, folderList) => (
+        <>
+        {
+          selectedFolder ? (
+            <NoteListInFolderPannel folder={selectedFolder} setFolder={setSelectedFolder} folderList={folderList} />
+          ) : (
+            <Vertical className="p-4 h-full " justify="center" align="center">
+              <EmptyMessageCard message="폴더를 선택하여 노트를 작성하세요." />
+            </Vertical>
+          )
+        }
+        </>
+      )}
+    </ResizableBoxWithNoteFolderSidebar>
   );
 };
 

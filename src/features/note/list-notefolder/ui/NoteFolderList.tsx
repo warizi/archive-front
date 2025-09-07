@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { NoteFolderWithIdPresent } from "@/entities/note";
 import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors, type DragEndEvent, type DragStartEvent } from "@dnd-kit/core";
 import { flattenFolders, unflattenFoldersPreserveMeta } from "../model/formatList";
@@ -6,24 +6,31 @@ import { moveNode, parseDrop } from "../model/noteFolderMove";
 import { toast } from "sonner";
 import DraggableNotefolderItem from "./DragableNoteFolderItem";
 import DroppableNoteFolder from "./DroppableNoteFolder";
-import { useGetAllNoteFolder } from "../model/listNoteFolderApiHooks";
 import { useMoveNoteFolder } from "../../update-notefolder";
 import axios from "axios";
 
-function NoteFolderList() {
-  const { data } = useGetAllNoteFolder();
-  const [ list, setList ] = useState<NoteFolderWithIdPresent[]>([]);
+interface NoteFolderListProps {
+  data?: NoteFolderWithIdPresent[];
+  selectedFolder: NoteFolderWithIdPresent | null;
+  onClickFolder: (folder: NoteFolderWithIdPresent) => void;
+}
+
+function NoteFolderList({ 
+  data,
+  selectedFolder,
+  onClickFolder
+}: NoteFolderListProps) {
+  const list = unflattenFoldersPreserveMeta(data || [])
   const [ isActiveItem, setIsActiveItem ] = useState<NoteFolderWithIdPresent | null>(null);
 
   const { mutate } = useMoveNoteFolder();
 
-  // depth 0~2까지
   const flatList = flattenFolders(list);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        delay: 200,      // ms: 이 시간 동안 눌러야 드래그 시작
+        delay: 400,      // ms: 이 시간 동안 눌러야 드래그 시작
         tolerance: 6,    // px: 지연 중 허용 이동치(손가락 떨림 보정)
       },
     })
@@ -63,24 +70,11 @@ function NoteFolderList() {
         }
       }
     });
-
-    // mutate();
-    // setList(prev => {
-    //   const ok = moveNode(prev, activeId, drop);
-    //   return ok ? [...prev] : prev; // 변경 없으면 레퍼런스 유지
-    // });
   };
-
-  useEffect(() => {
-    if (data?.data) {
-      console.log("NoteFolderList data loaded", data.data);
-      setList(unflattenFoldersPreserveMeta(data.data));
-    }
-  }, [data]);
 
   return (
     <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <DroppableNoteFolder list={list} />
+      <DroppableNoteFolder list={list} onSelect={onClickFolder} selectedFolder={selectedFolder} />
       <DragOverlay>
         {isActiveItem ? (
           <div className="opacity-50">

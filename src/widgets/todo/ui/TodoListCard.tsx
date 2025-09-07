@@ -76,7 +76,7 @@ function TodoListCard({ todoList, repeatTodoList, category }: TodoListCardProps)
                   <CollapsibleContent>
                     <div className="space-y-1">
                       {repeatTodoList.map(todo => (
-                        <TodoRow key={todo.id} todo={todo} sheetDisabled={true} deleteDisabled={true} />
+                        <TodoRow key={todo.id} todo={todo} sheetDisabled={true} deleteDisabled={true} categoryTagDisplay={false} />
                       ))}
                     </div>
                   </CollapsibleContent>
@@ -104,7 +104,7 @@ function TodoListCard({ todoList, repeatTodoList, category }: TodoListCardProps)
                   </div>
                   <CollapsibleContent className="flex flex-col gap-1">
                     {sortedCompletedList.map(todo => (
-                      <TodoRow key={todo.id} todo={todo} sheetDisabled={false} />
+                      <TodoRow key={todo.id} todo={todo} sheetDisabled={false} categoryTagDisplay={false}/>
                     ))}
                   </CollapsibleContent>
                 </Collapsible>

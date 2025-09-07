@@ -65,7 +65,7 @@ export function moveNode(
   }
 
   // 깊이 제한 검증
-  if (!canMoveToParent(src.node, dstParent, 2)) return false;
+  if (!canMoveToParent(src.node, dstParent, 100)) return false;
 
   // 원래 자리에서 제거
   const srcSiblings = src.parent ? src.parent.child : roots;

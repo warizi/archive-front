@@ -22,7 +22,6 @@ function UpdateNoteFolderDialogContent({ noteFolder }: UpdateNoteFolderDialogCon
   const { mutate } = useUpdateNoteFolder();
 
   const onSubmit = (data: NoteFolderType) => {
-    
     mutate({ id: noteFolder.id, name: data.name }, {
       onSuccess: () => {
         toast.success("폴더 이름이 변경되었습니다.");
@@ -45,7 +44,7 @@ function UpdateNoteFolderDialogContent({ noteFolder }: UpdateNoteFolderDialogCon
         </DialogDescription>
       </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} id="update-note-folder-form">
+          <form onSubmit={form.handleSubmit(onSubmit)} id={`update-note-folder-form-${noteFolder.id}`}>
             <FormField 
               control={form.control}
               name="name"
@@ -71,7 +70,9 @@ function UpdateNoteFolderDialogContent({ noteFolder }: UpdateNoteFolderDialogCon
           <Button variant={"outline"}>취소</Button>
         </DialogClose>
         <DialogClose asChild>
-          <Button type="submit" form="update-note-folder-form">확인</Button>
+          <Button type="button" form={`update-note-folder-form-${noteFolder.id}`}
+            onClick={() => onSubmit(form.getValues())}
+          >확인</Button>
         </DialogClose>
       </DialogFooter>
     </DialogContent>

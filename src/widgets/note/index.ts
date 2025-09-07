@@ -1,5 +1,7 @@
-import NoteFolderSidebar from "./ui/NoteFolderSidebar";
+import ResizableBoxWithNoteFolderSidebar from "./ui/ResizableBoxWithNoteFolderSidebar";
+import NoteListInFolderPannel from "./ui/NoteListPannel";
 
 export {
-  NoteFolderSidebar
+  ResizableBoxWithNoteFolderSidebar,
+  NoteListInFolderPannel
 }
