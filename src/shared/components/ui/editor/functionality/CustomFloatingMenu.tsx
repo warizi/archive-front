@@ -1,14 +1,14 @@
 import { FloatingMenu } from "@tiptap/react";
 import { useEditorState, type Editor } from "@tiptap/react";
-import { Card, CardContent, CardDescription } from "../card";
+import { Card, CardContent, CardDescription } from "../../card";
 import { Heading1, Heading2, Heading3, List, ListOrdered, Minus, type LucideIcon } from "lucide-react";
-import Horizontal from "../Horizontal";
-import Vertical from "../Vertical";
+import Horizontal from "../../Horizontal";
+import Vertical from "../../Vertical";
 import { cn } from "@/shared/lib/utils";
 import { useEffect, useState } from "react";
-import { isFloatingMenu } from "./helper/isFloatingMenu";
-import { deleteSlashText } from "./helper/deleteSlashText";
-import EmptyMessageCard from "../EmptyMessageCard";
+import { isFloatingMenu } from "../helper/isFloatingMenu";
+import { deleteSlashText } from "../helper/deleteSlashText";
+import EmptyMessageCard from "../../EmptyMessageCard";
 
 interface CustomFloatingMenuItem {
   id: number;

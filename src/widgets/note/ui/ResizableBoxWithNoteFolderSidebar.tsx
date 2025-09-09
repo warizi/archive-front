@@ -4,6 +4,7 @@ import { NoteFolderList } from "@/features/note/list-notefolder";
 import { useGetAllNoteFolder } from "@/features/note/list-notefolder/model/listNoteFolderApiHooks";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/shared/components/resizable";
 import Horizontal from "@/shared/components/ui/Horizontal";
+import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { Separator } from "@/shared/components/ui/separator";
 import Vertical from "@/shared/components/ui/Vertical";
 import { useState } from "react";
@@ -24,8 +25,8 @@ function ResizableBoxWithNoteFolderSidebar({
       className="min-h-screen-no-header"
       direction="horizontal"
     >
-      <ResizablePanel minSize={15} defaultSize={20} className="bg-card-secondary">
-        <Vertical className="w-full">
+      <ResizablePanel minSize={15} defaultSize={20} className="bg-card-secondary h-full">
+        <Vertical className="w-full h-full">
           <Horizontal justify="between" align="center" className="pl-4">
             <span className="text-xs text-neutral-500">
               폴더 탐색기
@@ -33,7 +34,9 @@ function ResizableBoxWithNoteFolderSidebar({
             <CreateFolderButton />
           </Horizontal>
           <Separator orientation="horizontal" className="mb-4" />
-          <NoteFolderList data={data?.data} selectedFolder={selectedFolder} onClickFolder={setSelectedFolder} />
+          <ScrollArea className="w-full h-full overflow-auto">
+            <NoteFolderList data={data?.data} selectedFolder={selectedFolder} onClickFolder={setSelectedFolder} />
+          </ScrollArea>
         </Vertical>
       </ResizablePanel>
       <ResizableHandle />
