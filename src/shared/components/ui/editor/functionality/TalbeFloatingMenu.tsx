@@ -32,7 +32,7 @@ function TalbeFloatingMenu({ editor }: TalbeFloatingMenuProps) {
       }}
     >
       <Card className="p-1">
-        <Horizontal className="gap-1">
+        <Horizontal className="gap-1 w-fit">
           <Button 
             type="button"
             variant={"ghost"} 
@@ -64,6 +64,14 @@ function TalbeFloatingMenu({ editor }: TalbeFloatingMenuProps) {
             onClick={() => editor.chain().focus().deleteColumn().run()}
           >
             열 삭제
+          </Button>
+          <Button 
+            type="button"
+            variant={"ghost"} 
+            size={"sm"} 
+            onClick={() => editor.chain().focus().deleteTable().run()}
+          >
+            표 삭제
           </Button>
         </Horizontal>
       </Card>
