@@ -28,7 +28,7 @@ function ResizableBoxWithNoteFolderSidebar({
       <ResizablePanel minSize={15} defaultSize={20} className="bg-card-secondary h-full">
         <Vertical className="w-full h-full">
           <Horizontal justify="between" align="center" className="pl-4">
-            <span className="text-xs text-neutral-500">
+            <span className="text-xs text-neutral-500 truncate">
               폴더 탐색기
             </span>
             <CreateFolderButton />

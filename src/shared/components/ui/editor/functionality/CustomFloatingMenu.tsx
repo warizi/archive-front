@@ -1,7 +1,7 @@
 import { FloatingMenu } from "@tiptap/react";
 import { useEditorState, type Editor } from "@tiptap/react";
 import { Card, CardContent, CardDescription } from "../../card";
-import { Heading1, Heading2, Heading3, List, ListOrdered, Minus, Table, type LucideIcon } from "lucide-react";
+import { Code, Heading1, Heading2, Heading3, List, ListOrdered, Minus, Table, type LucideIcon } from "lucide-react";
 import Horizontal from "../../Horizontal";
 import Vertical from "../../Vertical";
 import { cn } from "@/shared/lib/utils";
@@ -114,6 +114,20 @@ const customFloatingMenuItems: CustomFloatingMenuItem[] = [
         .chain()
         .focus()
         .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+        .run();
+    }
+  },
+  {
+    id: 8,
+    icon: Code,
+    title: "코드 블록",
+    searchText: "code, 코드, 블록",
+    action: (editor) => {
+      deleteSlashText(editor);
+      editor
+        .chain()
+        .focus()
+        .setCodeBlock()
         .run();
     }
   }

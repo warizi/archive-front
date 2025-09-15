@@ -30,7 +30,7 @@ function ProfileSidebarFooter() {
                 <ChevronsUpDown />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-60 p-2" side="right" sideOffset={16} align="end" alignOffset={0}>
+            <DropdownMenuContent className="w-60 p-2" side="top" sideOffset={8} align="end" alignOffset={0}>
               <DropdownMenuLabel className="p-0 flex justify-start pl-2">
                 <ProfileCard />
               </DropdownMenuLabel>

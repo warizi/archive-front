@@ -60,7 +60,7 @@ function NoteListSortableTable({
                           <TableCell className="text-center flex flex-row justify-center">
                             <Book size={18} />
                           </TableCell>
-                          <TableCell className="truncate">
+                          <TableCell className="truncate cursor-pointer">
                             {item.title}
                           </TableCell>
                           <TableCell className="text-right">

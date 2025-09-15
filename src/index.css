@@ -216,3 +216,38 @@
   cursor: ew-resize;
   cursor: col-resize;
 }
+
+pre {
+  background-color: rgba(50, 50, 50, 1);
+}
+
+@media (max-width: 767px) {
+  html, body {
+    overscroll-behavior-y: none; /* 뷰포트 탄성 자체 차단 */
+    height: 100%;
+  }
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+body{
+  -ms-overflow-style: none;
+  }
+  
+ ::-webkit-scrollbar {
+   display: none;
+ }
+ 
+ .box{
+    -ms-overflow-style: none;
+ }
+ .box::-webkit-scrollbar{
+   display:none;
+ }

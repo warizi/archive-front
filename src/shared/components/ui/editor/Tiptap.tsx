@@ -9,6 +9,7 @@ import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
 import TalbeFloatingMenu from './functionality/TalbeFloatingMenu'
+import CustomCodeBlock from './extention/CustomCodeBlock'
 
 function Tiptap({
   value,
@@ -21,7 +22,9 @@ function Tiptap({
     extensions: [
       StarterKit.configure({
         heading: false,
+        codeBlock: false,
       }), 
+      CustomCodeBlock,
       StyledHeading,
       SlashGuard,
       Table.configure({

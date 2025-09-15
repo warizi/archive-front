@@ -14,7 +14,7 @@ function NoteFolderBreadcrumb({
 }: NoteFolderBreadcrumbProps) {
   const path = findFolderPath(folderList, currentFolder);
   const { rootFolder, eclipsePath, prevLastPath, lastPath } = eclipsePathList(path);
-  console.log("eclipsePath", eclipsePathList(path));
+  
   return (
     <Breadcrumb>
       <BreadcrumbList>

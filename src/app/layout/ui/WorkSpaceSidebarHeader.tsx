@@ -54,7 +54,7 @@ function WorkSpaceSidebarHeader() {
                 <ChevronsUpDown />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-60 p-2" side="right" sideOffset={16} align="start" alignOffset={0}>
+            <DropdownMenuContent className="w-60 p-2" side="bottom" sideOffset={0} align="start" alignOffset={0}>
               <DropdownMenuLabel className="text-xs text-gray-400">워크스페이스</DropdownMenuLabel>
               {
                 data?.data?.map((workspace) => (

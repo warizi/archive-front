@@ -15,7 +15,7 @@ function CreateNoteInFolderButton({
   const { mutate, isPending } = useCreateNoteInFolder(folderId);
 
   const handleCreateNote = () => {
-    mutate({ title: "새 노트", contentJson: "" }, {
+    mutate({ title: "새 노트", contentJson: "", folderId }, {
       onSuccess: () => {
         toast.success("노트가 생성되었습니다.");
       },
