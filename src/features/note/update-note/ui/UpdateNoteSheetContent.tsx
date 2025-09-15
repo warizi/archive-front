@@ -66,7 +66,7 @@ function UpdateNoteSheetContent({ note }: UpdateNoteSheetContentProps) {
     };
   }, [form, mutate])
   return (
-    <SheetContent className="sm:max-w-[800px] h-dvh p-0 flex flex-col overflow-y-hidden">
+    <SheetContent className="sm:max-w-[800px] w-full h-dvh p-0 flex flex-col overflow-y-hidden">
       <Vertical className="flex-1 min-h-0 p-6 pt-12 pb-0 pr-4">
         <Form {...form}>
           <form id="update-note-form" className="flex h-full flex-col gap-4">

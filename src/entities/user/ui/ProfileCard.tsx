@@ -7,7 +7,7 @@ function ProfileCard() {
   const { user } = useMeStore();
   return (
     <Horizontal justify="center" align="center" className="h-12 gap-2">
-      <Avatar>
+      <Avatar className="group-data-[collapsible=icon]:size-4 transition-all duration-300 ease-in-out">
         <AvatarImage src="https://github.com/shadcn.png" alt="프로필 이미지" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>

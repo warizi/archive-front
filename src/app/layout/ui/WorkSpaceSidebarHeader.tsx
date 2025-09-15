@@ -46,7 +46,7 @@ function WorkSpaceSidebarHeader() {
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton className="h-12 flex justify-between w-full items-center cursor-pointer">
                 <Horizontal justify="center" align="center" className="h-12 gap-4">
-                  <Layers size={30} />
+                  <Layers size={35} />
                   <Vertical className="text-sm">
                     <span className="text-sm">{selectedWorkspace?.title}</span>
                   </Vertical>

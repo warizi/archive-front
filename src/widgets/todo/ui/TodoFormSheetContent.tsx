@@ -12,11 +12,11 @@ interface TodoFormSheetProps {
 function TodoFormSheet({ todoId, checkBoxDisabled }: TodoFormSheetProps) {
   const { data } = useGetTodo(todoId);
   return (
-    <SheetContent side="right" className="min-w-[450px]">
+    <SheetContent side="right" className="sm:max-w-[500px] w-full">
       <SheetHeader>
         <SheetTitle>TODO</SheetTitle>
       </SheetHeader>
-      <ScrollArea className="h-[calc(100vh-180px)]">
+      <ScrollArea className="h-[calc(100vh-100px)]">
         <div className="px-4 pb-2">
         <UpdateTodoForm defaultValues={data?.data} checkBoxDisabled={checkBoxDisabled}/>
         </div>

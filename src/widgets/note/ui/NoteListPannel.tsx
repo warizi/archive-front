@@ -8,6 +8,7 @@ import Vertical from "@/shared/components/ui/Vertical";
 import axios from "axios";
 import { toast } from "sonner";
 import NoteFolderBreadcrumb from "./NoteFolderBreadcrumb";
+import { ScrollArea } from "@/shared/components/ui/scroll-area";
 
 interface NoteListInFolderPannelProps {
   folder: NoteFolderWithIdPresent
@@ -56,11 +57,13 @@ function NoteListInFolderPannel({
         </Horizontal>
       </Horizontal>
       <Separator orientation="horizontal" />
-      <Vertical>
-        <NoteListSortableTable 
-          data={data?.data || []}
-          handleDragEnd={handleDragEnd}
-        />
+      <Vertical className="h-full">
+        <ScrollArea className="h-full w-full overflow-auto">
+          <NoteListSortableTable 
+            data={data?.data || []}
+            handleDragEnd={handleDragEnd}
+          />
+        </ScrollArea>
       </Vertical>
     </Vertical>
   );
