@@ -1,7 +1,7 @@
-import CreateFolderContextItem from "./ui/CreateFolderContextItem";
+import CreateFolderDropdownItem from "./ui/CreateFolderDropdownItem";
 import CreateFolderButton from "./ui/CreateFolderButton";
 
 export {
-  CreateFolderContextItem,
+  CreateFolderDropdownItem,
   CreateFolderButton
 };

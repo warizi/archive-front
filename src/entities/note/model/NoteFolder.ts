@@ -32,6 +32,8 @@ export const noteFolderSchema = z.object({
   sortOrder: z.number().int().optional(),
 });
 
+export const noteFolderCreateSchema = noteFolderSchema.omit({ id: true });
+
 export type NoteFolderType = z.infer<typeof noteFolderSchema>;
 
 export interface NoteFolder extends NoteFolderType {
@@ -40,7 +42,7 @@ export interface NoteFolder extends NoteFolderType {
 
 export type NoteFolderWithIdPresent = NoteFolder & Required<Pick<NoteFolder, 'id'>>;
 
-export type NoteFolderCreateType = Omit<NoteFolder, "id">;
+export type NoteFolderCreateType = z.infer<typeof noteFolderCreateSchema>;
 
 
 export function findNodeWithParent(

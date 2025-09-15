@@ -1,14 +1,14 @@
-import { ContextMenuItem } from "@/shared/components/ui/context-menu";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { useCreateNoteFolder } from "../model/createNoteFolderApiHooks";
 import axios from "axios";
+import { DropdownMenuItem } from "@/shared/components/ui/dropdown-menu";
 
-interface CreateFolderContextItemProps {
+interface CreateFolderDropdownItemProps {
   parentId: number;
 }
 
-function CreateFolderContextItem({ parentId }: CreateFolderContextItemProps) {
+function CreateFolderDropdownItem({ parentId }: CreateFolderDropdownItemProps) {
     const { mutate, isPending } = useCreateNoteFolder();
 
   const handleCreateFolder = () => {
@@ -25,11 +25,11 @@ function CreateFolderContextItem({ parentId }: CreateFolderContextItemProps) {
   };
 
   return (
-    <ContextMenuItem onClick={handleCreateFolder} disabled={isPending}>
+    <DropdownMenuItem onClick={handleCreateFolder} disabled={isPending}>
       <Plus />
       <span>새 폴더</span>
-    </ContextMenuItem>
+    </DropdownMenuItem>
   );
 };
 
-export default CreateFolderContextItem;
+export default CreateFolderDropdownItem;

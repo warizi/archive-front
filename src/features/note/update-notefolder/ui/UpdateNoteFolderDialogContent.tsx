@@ -36,7 +36,7 @@ function UpdateNoteFolderDialogContent({ noteFolder }: UpdateNoteFolderDialogCon
   };
 
   return (
-    <DialogContent>
+    <DialogContent className="w-[350px]">
       <DialogHeader>
         <DialogTitle>폴더 이름 변경</DialogTitle>
         <DialogDescription>

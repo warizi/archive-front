@@ -19,6 +19,16 @@ function RepeatText({ data }: RepeatTextProps) {
 
 export default RepeatText;
 
+const sortedWeekdays = {
+  [WEEKDAYS.MONDAY]: 0,
+  [WEEKDAYS.TUESDAY]: 1,
+  [WEEKDAYS.WEDNESDAY]: 2,
+  [WEEKDAYS.THURSDAY]: 3,
+  [WEEKDAYS.FRIDAY]: 4,
+  [WEEKDAYS.SATURDAY]: 5,
+  [WEEKDAYS.SUNDAY]: 6
+};
+
 // helper
 function getFrequencyText(data: TodoWithIdPresent): string {
   const frequency: typeof TODO_REPEAT_FREQUENCY[keyof typeof TODO_REPEAT_FREQUENCY] = data.repeat?.frequency ?? "";
@@ -27,8 +37,14 @@ function getFrequencyText(data: TodoWithIdPresent): string {
       return "매일";
     case TODO_REPEAT_FREQUENCY.WEEKLY:
       { const dayOfWeek = data.repeat?.dayOfWeek || [];
-        const dayOfWeekText = dayOfWeek.map(getDayOfWeekText).join(", ");
-      return `매주: ${dayOfWeekText}`; }
+        console.log(dayOfWeek);
+        const dayOfWeekText = dayOfWeek.sort(
+          (a, b) =>
+            (sortedWeekdays[a as keyof typeof sortedWeekdays] ?? 0) -
+            (sortedWeekdays[b as keyof typeof sortedWeekdays] ?? 0)
+        ).map(getDayOfWeekText).join(", ");
+        return `매주: ${dayOfWeekText}`; 
+      }
     case TODO_REPEAT_FREQUENCY.MONTHLY:
       return `매월: ${data.repeat?.dayOfMonth ?? 1}일`;
     case TODO_REPEAT_FREQUENCY.YEARLY:

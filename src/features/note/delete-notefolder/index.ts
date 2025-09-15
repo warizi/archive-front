@@ -1,7 +1,7 @@
 import DeleteNoteFolderAlertDialogContent from "./ui/DeleteNoteFolderAlertDialogContent";
-import DeleteNoteFolderContextMenuItem from "./ui/DeleteNoteFolderContextMenuItem";
+import DeleteNoteFolderDropdownMenuItem from "./ui/DeleteNoteFolderDropdownMenuItem";
 
 export {
   DeleteNoteFolderAlertDialogContent,
-  DeleteNoteFolderContextMenuItem
+  DeleteNoteFolderDropdownMenuItem
 }

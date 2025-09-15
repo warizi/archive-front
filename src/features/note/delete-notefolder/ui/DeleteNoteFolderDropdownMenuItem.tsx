@@ -1,9 +1,9 @@
-import { ContextMenuItem } from "@/shared/components/ui/context-menu";
+import { DropdownMenuItem } from "@/shared/components/ui/dropdown-menu";
 import { Trash2 } from "lucide-react";
 
-function DeleteNoteFolderContextMenuItem() {
+function DeleteNoteFolderDropdownMenuItem() {
   return (
-    <ContextMenuItem variant="destructive" className="group">
+    <DropdownMenuItem variant="destructive" className="group">
       <Trash2
         strokeWidth={1.5}
         className="
@@ -13,8 +13,8 @@ function DeleteNoteFolderContextMenuItem() {
           active:text-red-700 dark:active:text-red-300"
         />
       <span>폴더 삭제</span>
-    </ContextMenuItem>
+    </DropdownMenuItem>
   );
 };
 
-export default DeleteNoteFolderContextMenuItem;
+export default DeleteNoteFolderDropdownMenuItem;

@@ -1,45 +1,45 @@
 import type { NoteFolderWithIdPresent } from "@/entities/note";
-import { ContextMenu, ContextMenuContent, ContextMenuSeparator, ContextMenuTrigger } from "@/shared/components/ui/context-menu";
-import { CreateFolderContextItem } from "../../create-notefolder";
+import { CreateFolderDropdownItem } from "../../create-notefolder";
 import { AlertDialog, AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
-import { DeleteNoteFolderAlertDialogContent, DeleteNoteFolderContextMenuItem } from "../../delete-notefolder";
+import { DeleteNoteFolderAlertDialogContent, DeleteNoteFolderDropdownMenuItem } from "../../delete-notefolder";
 import { Dialog, DialogTrigger } from "@/shared/components/ui/dialog";
-import { UpdateNoteFolderContextMenuItem, UpdateNoteFolderDialogContent } from "../../update-notefolder";
+import { UpdateNoteFolderDropdownMenuItem, UpdateNoteFolderDialogContent } from "../../update-notefolder";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 
-interface NoteFolderContextMenuProps {
+interface NoteFolderDropdownMenuProps {
   noteFolder: NoteFolderWithIdPresent;
   asChild?: boolean;
   children: React.ReactNode;
 }
 
-function NoteFolderContextMenu({
+function NoteFolderDropdownMenu({
   noteFolder,
   asChild = false,
   children
-}: NoteFolderContextMenuProps) {
+}: NoteFolderDropdownMenuProps) {
   const { id } = noteFolder;
   return (
     <AlertDialog>
       <Dialog>
-        <ContextMenu>
-          <ContextMenuTrigger asChild={asChild}>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild={asChild}>
             {children}
-          </ContextMenuTrigger>
-          <ContextMenuContent className="w-52">
-            <CreateFolderContextItem parentId={id} />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-52">
+            <CreateFolderDropdownItem parentId={id} />
             <DialogTrigger asChild>
               <button onClick={(e) => e.stopPropagation()} className="w-full text-left">
-                <UpdateNoteFolderContextMenuItem />
+                <UpdateNoteFolderDropdownMenuItem />
               </button>
             </DialogTrigger>
-            <ContextMenuSeparator />
+            <DropdownMenuSeparator />
             <AlertDialogTrigger asChild>
               <button onClick={(e) => e.stopPropagation()} className="w-full text-left">
-                <DeleteNoteFolderContextMenuItem />
+                <DeleteNoteFolderDropdownMenuItem />
               </button>
             </AlertDialogTrigger>
-          </ContextMenuContent>
-        </ContextMenu>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <UpdateNoteFolderDialogContent noteFolder={noteFolder} />
       </Dialog>
       <DeleteNoteFolderAlertDialogContent noteFolder={noteFolder} />
@@ -47,4 +47,4 @@ function NoteFolderContextMenu({
   );
 };
 
-export default NoteFolderContextMenu;
+export default NoteFolderDropdownMenu;

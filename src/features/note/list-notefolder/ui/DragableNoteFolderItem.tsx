@@ -2,8 +2,8 @@ import type { NoteFolderWithIdPresent } from "@/entities/note";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/shared/components/ui/accordion";
 import Horizontal from "@/shared/components/ui/Horizontal";
 import { useDndContext, useDraggable, useDroppable } from "@dnd-kit/core";
-import NoteFolderContextMenu from "./NoteFolderContextMenu";
-import { Folder } from "lucide-react";
+import NoteFolderDropdownMenu from "./NoteFolderDropdownMenu";
+import { Edit, Folder } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 
 export interface DraggableNoteFolderItemProps {
@@ -69,28 +69,39 @@ export default function DraggableNotefolderItem({
               {...attributes}
               {...listeners}
         >
-          <NoteFolderContextMenu noteFolder={item} asChild>
-            <div
-              className={cn(
-                `relative h-8 hover:bg-muted w-full rounded-md px-2 pt-[6px] cursor-pointer ${over?.id === `droppable-inside-${item.id}` ? "bg-muted" : ""}`,
-                { 'bg-muted': selectedFolder?.id === item.id }
-              )}
-              style={{
-                paddingLeft: `${depth * 12 + 8}px`
-              }}
-              onClick={() => onClick && onClick(item)}
-            >
-              <Horizontal justify="between" className="w-full gap-2">
-                <Horizontal align="center" className="gap-2 w-full overflow-hidden" >
-                  <Folder size={16} className="shrink-0"/>
-                  <span className="truncate text-sm">
-                    {name}
-                  </span>
-                </Horizontal>
-                {child && child.length > 0 && <AccordionTrigger className="p-0 px-1 m-0 cursor-pointer" onClick={(e) => e.stopPropagation()} />}
+          <div
+            className={cn(
+              `relative h-8 hover:bg-muted w-full rounded-md pr-2 pt-[6px] cursor-pointer ${over?.id === `droppable-inside-${item.id}` ? "bg-muted" : ""}`,
+              { 'bg-muted': selectedFolder?.id === item.id },
+              "group",
+              "pl-0"
+            )}
+            style={{
+              paddingLeft: `${depth * 12 + 8}px`
+            }}
+            onClick={() => onClick && onClick(item)}
+          >
+            <Horizontal justify="between" className="w-full gap-1">
+              {child && child.length > 0 ? 
+                (<AccordionTrigger className="p-0 px-1 m-0 cursor-pointer shrink-0 min-w-0" onClick={(e) => e.stopPropagation()} />)
+                : (<AccordionTrigger className="p-0 px-1 m-0 cursor-pointer opacity-0 shrink-0 min-w-0" onClick={(e) => e.stopPropagation()} />)
+              }
+              <Horizontal align="center" className="gap-2 w-full flex-1 min-w-0 overflow-hidden" >
+                <Folder size={16} className="shrink-0"/>
+                <span className="truncate text-sm flex-1 min-w-0"> 
+                  {name}
+                </span>
               </Horizontal>
-            </div>
-          </NoteFolderContextMenu>
+              <NoteFolderDropdownMenu
+                noteFolder={item}
+                asChild
+              >
+                <button type="button" className="shrink-0 opacity-30 group-hover:opacity-100 transition-opacity">
+                  <Edit size={16} />
+                </button>
+              </NoteFolderDropdownMenu>
+            </Horizontal>
+          </div>
           {child && child.length > 0 && (
             <AccordionContent className="pt-1 pb-0">
               {/* <div> */}

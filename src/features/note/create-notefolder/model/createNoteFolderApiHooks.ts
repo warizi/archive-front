@@ -6,7 +6,7 @@ export const useCreateNoteFolder = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { name: string; parentId: number | null }) => createNoteFolder(data.name, data.parentId === null ? null : String(data.parentId)),
+    mutationFn: (data: { name: string; parentId?: number | null }) => createNoteFolder(data.name, data.parentId === null ? null : String(data.parentId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [listNoteFolderKey] });
     }
