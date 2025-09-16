@@ -251,3 +251,9 @@ body{
  .box::-webkit-scrollbar{
    display:none;
  }
+
+ .note-scroll [data-radix-scroll-area-viewport] > div {
+  display: block !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}

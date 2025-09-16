@@ -61,9 +61,10 @@ export default function DraggableNotefolderItem({
     <Accordion
       type="multiple"
       disabled={isDragging} 
+      className="w-full min-w-0"
     >
-      <AccordionItem value={`${item.id}`}>
-        <div className="relative"
+      <AccordionItem value={`${item.id}`} className="w-full min-w-0">
+        <div className="relative w-full min-w-0"
           ref={setNodeRef}
               style={style}
               {...attributes}
@@ -71,7 +72,7 @@ export default function DraggableNotefolderItem({
         >
           <div
             className={cn(
-              `relative h-8 hover:bg-muted w-full rounded-md pr-2 pt-[6px] cursor-pointer ${over?.id === `droppable-inside-${item.id}` ? "bg-muted" : ""}`,
+              `relative h-8 hover:bg-muted w-full min-w-0 rounded-md pr-2 pt-[6px] cursor-pointer ${over?.id === `droppable-inside-${item.id}` ? "bg-muted" : ""}`,
               { 'bg-muted': selectedFolder?.id === item.id },
               "group",
               "pl-0"
@@ -81,14 +82,14 @@ export default function DraggableNotefolderItem({
             }}
             onClick={() => onClick && onClick(item)}
           >
-            <Horizontal justify="between" className="w-full gap-1">
+            <Horizontal className="w-full gap-1 min-w-0 relative">
               {child && child.length > 0 ? 
                 (<AccordionTrigger className="p-0 px-1 m-0 cursor-pointer shrink-0 min-w-0" onClick={(e) => e.stopPropagation()} />)
                 : (<AccordionTrigger className="p-0 px-1 m-0 cursor-pointer opacity-0 shrink-0 min-w-0" onClick={(e) => e.stopPropagation()} />)
               }
-              <Horizontal align="center" className="gap-2 w-full flex-1 min-w-0 overflow-hidden" >
+              <Horizontal align="center" className="gap-2 flex-1 min-w-0 overflow-hidden" >
                 <Folder size={16} className="shrink-0"/>
-                <span className="truncate text-sm flex-1 min-w-0"> 
+                <span className="truncate text-sm flex-1 min-w-0 "> 
                   {name}
                 </span>
               </Horizontal>

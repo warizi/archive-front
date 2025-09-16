@@ -30,13 +30,13 @@ function RepeatTodoListCard({ repeatFrequency }: RepeatTodoListCardProps) {
     frequency: repeatFrequency
   });
 
-  const { selectedCategories } = useCategoryFilter();
+  const { getSelectedCategories } = useCategoryFilter();
 
   const filteredData = data?.content.filter(todo => {
-    if (selectedCategories.length === 0) return false;
-    if (selectedCategories.includes(UNCATEGORIZED_ID) && !todo?.category) return true;
+    if (getSelectedCategories().length === 0) return false;
+    if (getSelectedCategories().includes(UNCATEGORIZED_ID) && !todo?.category) return true;
     const todoCategoryId = todo?.category?.id || -1;
-    return selectedCategories.includes(todoCategoryId);
+    return getSelectedCategories().includes(todoCategoryId);
   }) || [];
 
   return (

@@ -6,7 +6,7 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/components/ui/sidebar";
 import { ROUTES_URL } from "@/shared/constants";
 import { CategorySettingModal } from "@/widgets/category";
-import { ChevronsUpDown, Home, LogOut, Moon, Sun, Tags, UserPen, UserStar } from "lucide-react";
+import { ChevronsUpDown, Home, LogOut, Moon, Sun, Tags, UserStar } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -35,12 +35,12 @@ function ProfileSidebarFooter() {
                 <ProfileCard />
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer">
+              {/* <DropdownMenuItem className="cursor-pointer">
                 <UserPen />
                 <Link to={"#"}>
                   프로필 수정
                 </Link>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuItem onSelect={() => setIsOpenCategorySetting(true)}>
                 <Tags />
                 카테고리 설정

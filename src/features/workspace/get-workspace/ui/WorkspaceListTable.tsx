@@ -22,7 +22,7 @@ function WorkspaceListTable({ selectedWorkspace, onWorkspaceSelect }: WorkspaceL
   };
 
   return (
-    <ScrollArea className="h-[300px] w-full">
+    <ScrollArea className="h-[150px] w-full">
       <Table>
         <TableBody>
           {data?.data?.map((workspace) => (

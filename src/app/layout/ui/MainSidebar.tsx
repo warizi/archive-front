@@ -1,7 +1,14 @@
 import { Separator } from "@/shared/components/ui/separator";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/components/ui/sidebar";
 import { ROUTES_URL } from "@/shared/constants";
-import { BookCheck, Calendar, Calendar1, CalendarCheck, Check, Folder, Home, NotepadText, Repeat2 } from "lucide-react";
+import { 
+  BookCheck, 
+  // Calendar, 
+  // Calendar1, 
+  // CalendarCheck, 
+  // Check, 
+  // Folder, 
+  Home, NotepadText, Repeat2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfileSidebarFooter from "./ProfileSidebarFooter";
 import WorkSpaceSidebarHeader from "./WorkSpaceSidebarHeader";
@@ -35,7 +42,7 @@ function MainSidebar() {
           <SidebarGroupLabel>Todo</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
+              {/* <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"오늘 할 일"} asChild>
                   <Link to={ROUTES_URL.TODO_TODAY}>
                     <Calendar1 />
@@ -44,7 +51,7 @@ function MainSidebar() {
                     </span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem>
+              </SidebarMenuItem> */}
               <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"할 일 목록"} asChild>
                   <Link to={ROUTES_URL.TODO}>
@@ -65,7 +72,7 @@ function MainSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
+              {/* <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"완료한 일"} asChild>
                   <Link to={ROUTES_URL.TODO_COMPLETE}>
                     <Check />
@@ -74,7 +81,7 @@ function MainSidebar() {
                     </span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem>
+              </SidebarMenuItem> */}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -94,22 +101,12 @@ function MainSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton tooltip={"폴더"} asChild>
-                  <Link to={"#"}>
-                    <Folder />
-                    <span>
-                      폴더
-                    </span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
         <Separator />
         {/* CALENDAR */}
-        <SidebarGroup>
+        {/* <SidebarGroup>
           <SidebarGroupLabel>Calendar</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -135,7 +132,7 @@ function MainSidebar() {
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup> */}
       </SidebarContent>
       <ProfileSidebarFooter />
     </Sidebar>

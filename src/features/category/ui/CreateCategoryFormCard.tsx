@@ -3,16 +3,20 @@ import { useCreateCategoryMutation } from "../model/categoryApiHooks";
 import CategoryFormCard from "./CategoryFormCard";
 import { toast } from "sonner";
 import axios from "axios";
+import { useCategoryFilter } from "../model/useCategoryFilter";
 
 function CreateCategoryFormCard() {
   const { mutate } = useCreateCategoryMutation();
+  const { addSelectedCategory } = useCategoryFilter();
 
   const onSubmit = (data: CategoryType) => {
     mutate(data, {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        const { id } = res;
         toast.success(`카테고리가 추가되었습니다.`, {
           description: `${data.name}`
         })
+        addSelectedCategory(id);
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {

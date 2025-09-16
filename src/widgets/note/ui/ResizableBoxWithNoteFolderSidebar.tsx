@@ -34,13 +34,13 @@ function ResizableBoxWithNoteFolderSidebar({
             <CreateFolderButton />
           </Horizontal>
           <Separator orientation="horizontal" className="mb-4" />
-          <ScrollArea className="w-full h-full overflow-auto">
+          <ScrollArea className="w-full h-full overflow-y-auto overflow-x-hidden min-w-0 note-scroll">
             <NoteFolderList data={data?.data} selectedFolder={selectedFolder} onClickFolder={setSelectedFolder} />
           </ScrollArea>
         </Vertical>
       </ResizablePanel>
       <ResizableHandle />
-      <ResizablePanel minSize={60} defaultSize={80}>
+      <ResizablePanel minSize={40} defaultSize={80}>
         {children ? children(selectedFolder, setSelectedFolder, data?.data || []) : null}
       </ResizablePanel>
     </ResizablePanelGroup>

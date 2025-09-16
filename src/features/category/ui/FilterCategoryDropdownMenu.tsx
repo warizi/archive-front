@@ -6,6 +6,7 @@ import { CategoryTag } from "@/entities/catogory";
 import { useCategoryFilter } from "../model/useCategoryFilter";
 import { UNCATEGORIZED_ID } from "../model/contants";
 import Horizontal from "@/shared/components/ui/Horizontal";
+import { useEffect } from "react";
 
 function FilterCategoryDropdownMenu() {
   const { data } = useGetCategoryListQuery({
@@ -15,7 +16,7 @@ function FilterCategoryDropdownMenu() {
   });
 
   const { 
-    selectedCategories,
+    getSelectedCategories,
     isSelectedCategory, 
     addSelectedCategory, 
     removeSelectedCategory, 
@@ -32,6 +33,14 @@ function FilterCategoryDropdownMenu() {
       addSelectedCategory(categoryId);
     }
   };
+
+  useEffect(() => {
+    const allList = data?.content.map(category => category.id) || [];
+    // 카테고리가 없을 경우 미분류 항상 노출
+    if (allList.length === 0) {
+      addSelectedCategory(UNCATEGORIZED_ID);
+    }
+  }, [addSelectedCategory, data, removeDirtyCategories]);
 
   return (
     <Horizontal align="center">
@@ -62,7 +71,7 @@ function FilterCategoryDropdownMenu() {
         </DropdownMenuContent>
       </DropdownMenu>
       <Horizontal className="gap-1">
-        {selectedCategories.length > 0 && data?.content?.filter(category => selectedCategories.includes(category.id)).map(category => (
+        {getSelectedCategories().length > 0 && data?.content?.filter(category => getSelectedCategories().includes(category.id)).map(category => (
           <CategoryTag key={category.id} category={category} />
         ))}
       </Horizontal>

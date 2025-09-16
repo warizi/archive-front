@@ -1,4 +1,5 @@
 import type { WorkspaceIdPresent } from "@/entities/workspace";
+import { useCategoryFilter } from "@/features/category";
 import { useGetListWorkspaces } from "@/features/workspace/get-workspace";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 import Horizontal from "@/shared/components/ui/Horizontal";
@@ -14,7 +15,7 @@ function WorkSpaceSidebarHeader() {
   const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceIdPresent | null>(null);
 
   const [isOpenWorkspaceModal, setIsOpenWorkspaceModal] = useState<boolean>(false);
-
+  const { setWorkspace } = useCategoryFilter();
 
   const handleSelectWorkspace = (workspaceId: string) => {
     workspaceStore.set(workspaceId);
@@ -23,6 +24,7 @@ function WorkSpaceSidebarHeader() {
   workspaceStore.subscribe((workspaceId) => {
     const workspace = data?.data.find(ws => ws.id === workspaceId);
     setSelectedWorkspace(workspace || null);
+    setWorkspace(workspaceId);
   });
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function WorkSpaceSidebarHeader() {
     if (wsId) {
       const workspace = data?.data.find(ws => ws.id === wsId) || null;
       setSelectedWorkspace(workspace);
+      setWorkspace(wsId);
     } else {
       const workspace = data?.data[0] || null;
       if (workspace) {

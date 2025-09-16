@@ -28,7 +28,7 @@ export default function DroppableNoteFolder({
     },
   })
   return (
-    <div className="w-full px-2" ref={setNodeRef}>
+    <div className="w-full min-w-0 px-2 overflow-hidden" ref={setNodeRef}>
       {
         list.length === 0 && (
           <EmptyMessageCard message="폴더가 없습니다. 새 폴더를 생성하세요." />

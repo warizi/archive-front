@@ -37,7 +37,6 @@ function getFrequencyText(data: TodoWithIdPresent): string {
       return "매일";
     case TODO_REPEAT_FREQUENCY.WEEKLY:
       { const dayOfWeek = data.repeat?.dayOfWeek || [];
-        console.log(dayOfWeek);
         const dayOfWeekText = dayOfWeek.sort(
           (a, b) =>
             (sortedWeekdays[a as keyof typeof sortedWeekdays] ?? 0) -
