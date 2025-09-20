@@ -9,7 +9,7 @@ import { ChevronsUpDown } from "lucide-react";
 import type { CategoryWithIdPresent } from "@/entities/catogory/model/Category";
 import { CategoryTag } from "@/entities/catogory";
 import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard";
-import TodoRow from "./TodoRow";
+import { TodoRow } from "@/features/todo/list-todo";
 
 interface TodoListCardProps {
   todoList: TodoWithIdPresent[];

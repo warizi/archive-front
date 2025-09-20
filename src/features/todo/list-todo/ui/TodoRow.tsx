@@ -1,7 +1,7 @@
 import { Todo, TODO_QUERY_KEY, type TodoWithIdPresent } from "@/entities/todo";
 import { TodoCheckbox } from "@/features/todo/complete-todo";
 import { Sheet, SheetTrigger } from "@/shared/components/ui/sheet";
-import { TodoFormSheetContent } from "..";
+import { TodoFormSheetContent } from "@/features/todo/update-todo";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/shared/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -18,14 +18,17 @@ interface TodoRowProps {
   checkBoxDisabled?: boolean; // true면 체크박스 숨김 (완료된 할 일 등)
   deleteDisabled?: boolean; // true면 삭제 버튼 숨김 (반복 할 일 등)
   categoryTagDisplay?: boolean; // categoryTag 표시 여부, 기본값 true
+  editDisabled?: boolean; // true면 수정 버튼 숨김 (완료된 할 일 등)
 }
 
-function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled, categoryTagDisplay = true }: TodoRowProps) {
+function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled, categoryTagDisplay = true, editDisabled }: TodoRowProps) {
   const [ isOpen, setIsOpen ] = useState(false);
+  const [ isSheetOpen, setIsSheetOpen ] = useState(false);
 
   const queryClient = useQueryClient();
 
   const handleCloseEffect = (isOpen: boolean) => {
+    setIsSheetOpen(isOpen);
     if (!isOpen) {
       queryClient.invalidateQueries({ queryKey: TODO_QUERY_KEY.LIST });
     }
@@ -34,7 +37,7 @@ function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled, catego
   const sortedTodoSub = todo?.subTodo?.slice().sort((a, b) => (a.id || 0) - (b.id || 0)) || [];
 
   return (
-    <Sheet onOpenChange={handleCloseEffect}>
+    <Sheet open={isSheetOpen} onOpenChange={handleCloseEffect}>
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div>
           <div className="flex w-[332px] gap-2 hover:bg-muted px-2 rounded-md group transition-colors duration-500">
@@ -49,7 +52,7 @@ function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled, catego
               </div>
             </SheetTrigger>
             {/* form */}
-            { !sheetDisabled && <TodoFormSheetContent checkBoxDisabled={checkBoxDisabled} todoId={todo.id} /> }
+            { !sheetDisabled && <TodoFormSheetContent isOpen={isSheetOpen} checkBoxDisabled={checkBoxDisabled} todoId={todo.id} disable={editDisabled} /> }
             <Horizontal>
               {
                 todo.subTodo && todo.subTodo.length > 0 && (

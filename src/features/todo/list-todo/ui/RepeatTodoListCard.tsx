@@ -1,11 +1,12 @@
 import { TODO_REPEAT_FREQUENCY } from "@/entities/todo";
 import { useGetFrequencyRepeatTodoList } from "@/features/todo/list-todo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card";
-import TodoRow from "./TodoRow";
+import { TodoRow } from "@/features/todo/list-todo";
 import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { useCategoryFilter } from "@/features/category";
 import { UNCATEGORIZED_ID } from "@/features/category/model/contants";
 import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard";
+
 interface RepeatTodoListCardProps {
   repeatFrequency: keyof typeof TODO_REPEAT_FREQUENCY;
 }

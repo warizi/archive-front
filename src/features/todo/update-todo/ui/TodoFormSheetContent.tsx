@@ -7,10 +7,12 @@ import { SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle } from "
 interface TodoFormSheetProps {
   todoId?: number,
   checkBoxDisabled?: boolean
+  disable?: boolean; // true면 수정 불가 (완료된 할 일 등)
+  isOpen?: boolean; // open 상태를 부모 컴포넌트에서 제어
 }
 
-function TodoFormSheet({ todoId, checkBoxDisabled }: TodoFormSheetProps) {
-  const { data } = useGetTodo(todoId);
+function TodoFormSheet({ todoId, checkBoxDisabled, disable, isOpen = false }: TodoFormSheetProps) {
+  const { data, isSuccess } = useGetTodo(todoId, { enabled: isOpen && !!todoId });
   return (
     <SheetContent side="right" className="sm:max-w-[500px] w-full">
       <SheetHeader>
@@ -18,7 +20,11 @@ function TodoFormSheet({ todoId, checkBoxDisabled }: TodoFormSheetProps) {
       </SheetHeader>
       <ScrollArea className="h-[calc(100vh-100px)]">
         <div className="px-4 pb-2">
-        <UpdateTodoForm defaultValues={data?.data} checkBoxDisabled={checkBoxDisabled}/>
+          {
+            isSuccess && (
+              <UpdateTodoForm defaultValues={data?.data} checkBoxDisabled={checkBoxDisabled} disable={disable}/>
+            )
+          }
         </div>
       </ScrollArea>
       <SheetFooter className="sticky bottom-0 left-2 bg-inherit">

@@ -8,6 +8,9 @@ import type { TodoRepeat, TodoRepeatWithIdPresent, TodoRepeatCreateType } from "
 import { todoSubSchema } from "./model/TodoSub";
 import type { TodoSubType, TodoSubWithIdPresent, TodoSubCreateType } from "./model/TodoSub";
 
+import { todoCompletedHistorySchema } from "./model/TodoCompletedHistory";
+import type { TodoCompletedHistory, TodoCompletedHistoryCursor, CompletedTodoHistoryResponse } from "./model/TodoCompletedHistory";
+
 import { TODO_QUERY_KEY } from "./model/queryKeys";
 
 import { IMPORTANCE_COLOR } from "./model/ImportanceColor";
@@ -42,6 +45,12 @@ export {
   type TodoSubType,
   type TodoSubWithIdPresent,
   type TodoSubCreateType,
+
+  // todo history
+  todoCompletedHistorySchema,
+  type TodoCompletedHistory,
+  type TodoCompletedHistoryCursor,
+  type CompletedTodoHistoryResponse,
 
   IMPORTANCE_COLOR
 }

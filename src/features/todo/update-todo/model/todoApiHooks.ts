@@ -15,8 +15,8 @@ export const useUpdateTodo = (id: number) => {
   });
 };
 
-export const useGetTodo = (id?: number) => useQuery({
+export const useGetTodo = (id?: number, opts?: { enabled?: boolean }) => useQuery({
   queryKey: TODO_QUERY_KEY.detail(id),
   queryFn: () => getTodoApi(id),
-  enabled: !!id
+  enabled: !!id && (opts?.enabled ?? true)
 })

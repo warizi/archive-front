@@ -1,5 +1,5 @@
 import { TODO_REPEAT_FREQUENCY } from "@/entities/todo";
-import RepeatTodoListCard from "./RepeatTodoListCard";
+import { RepeatTodoListCard } from "@/features/todo/list-todo";
 
 function RepeatTodoListCardList() {
   return (

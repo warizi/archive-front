@@ -20,6 +20,7 @@ import { useDebouncedAutosave } from "../model/UseDebouncedAutoSave";
 interface UpdateTodoFormProps {
   defaultValues?: TodoWithIdPresent;
   checkBoxDisabled?: boolean;
+  disable?: boolean; // true면 수정 불가 (완료된 할 일 등)
 }
 
 const TABS = {
@@ -27,12 +28,13 @@ const TABS = {
   REPEAT: '반복',
 }
 
-function UpdateTodoForm({ defaultValues, checkBoxDisabled = false }: UpdateTodoFormProps) {
+function UpdateTodoForm({ defaultValues, checkBoxDisabled = false, disable = false }: UpdateTodoFormProps) {
   const form = useForm<TodoWithIdPresent>({
     resolver: zodResolver(todoSchema.required({ id: true })),
     defaultValues: {
       id: 1, title: "", description: "", completed: false, ...defaultValues,
     },
+    disabled: disable,
   });
 
   

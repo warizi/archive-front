@@ -1,5 +1,5 @@
 import { useGetCategorizedRepeatTodoList, useGetCategorizedTodoList } from "@/features/todo/list-todo";
-import TodoListCard from "./TodoListCard";
+import { TodoListCard } from "@/features/todo/list-todo";
 import type { CategoryWithIdPresent } from "@/entities/catogory/model/Category";
 
 interface CategorizedTodoListProps {
