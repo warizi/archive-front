@@ -39,7 +39,7 @@ function WorkSpaceSidebarHeader() {
         workspaceStore.set(workspace.id);
       }
     }
-  }, [data])
+  }, [data, setWorkspace])
 
   return (
     <SidebarHeader>

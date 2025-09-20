@@ -85,7 +85,7 @@ function SignupForm() {
               variant={"link"} 
               size={"sm"} 
               type="button" 
-              className="text-gray-500 hover:text-gray-900 text-xs"
+              className="text-gray-500 hover:text-gray-900 hover:dark:text-gray-200 text-xs"
               onClick={() => navigate(ROUTES_URL.LOGIN)}
             >
               이미 계정이 있으신가요? 로그인

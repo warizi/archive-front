@@ -51,7 +51,7 @@ function LoginForm() {
               variant={"link"} 
               size={"sm"} 
               type="button" 
-              className="text-gray-500 hover:text-gray-900 text-xs"
+              className="text-gray-500 hover:text-gray-900 hover:dark:text-gray-200 text-xs"
               onClick={() => navigate(ROUTES_URL.SIGNUP)}
             >
               회원가입이 필요하신가요? 회원가입

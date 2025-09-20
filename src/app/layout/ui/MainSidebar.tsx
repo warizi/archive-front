@@ -3,6 +3,7 @@ import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGrou
 import { ROUTES_URL } from "@/shared/constants";
 import { 
   BookCheck, 
+  Check, 
   // Calendar, 
   // Calendar1, 
   // CalendarCheck, 
@@ -72,7 +73,7 @@ function MainSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* <SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton tooltip={"완료한 일"} asChild>
                   <Link to={ROUTES_URL.TODO_COMPLETE}>
                     <Check />
@@ -81,7 +82,7 @@ function MainSidebar() {
                     </span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem> */}
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
