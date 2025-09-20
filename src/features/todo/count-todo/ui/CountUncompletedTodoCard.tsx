@@ -7,7 +7,7 @@ function CountUncompletedTodoCard() {
   const { data } = useGetUncompletedTodoCount();
   return (
     <CountCard
-      title="완료되지 않은 할 일"
+      title="미완료 할 일"
       count={data?.data ?? 0}
       unit="개"
       icon={<CircleAlert size={20} />}
@@ -15,7 +15,7 @@ function CountUncompletedTodoCard() {
       link={ROUTES_URL.TODO}
     >
       <span className="text-sm text-muted-foreground">
-        완료되지 않은 할 일의 개수 (반복 제외)
+        미완료 할 일의 개수 (반복 제외)
       </span>
     </CountCard>
   );

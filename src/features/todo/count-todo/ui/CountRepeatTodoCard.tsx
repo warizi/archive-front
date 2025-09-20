@@ -7,7 +7,7 @@ function CountRepeatTodoCard() {
   const { data } = useGetRepeatTodoCount();
   return (
     <CountCard
-      title="등록된 반복 할 일"
+      title="반복 할 일"
       count={data?.data ?? 0}
       unit="개"
       icon={<Repeat2 size={20} />}
