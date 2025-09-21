@@ -14,6 +14,9 @@ export const useCompleteTodoMutate = () => {
       queryClient.invalidateQueries({
         queryKey: TODO_QUERY_KEY.detail(data?.data.id),
       });
+      queryClient.invalidateQueries({
+        queryKey: [TODO_QUERY_KEY.LIST, TODO_QUERY_KEY.TODAY_ALL],
+      });
     },
   })
 }

@@ -11,6 +11,9 @@ export const useCompleteTodoSub = () => {
       queryClient.invalidateQueries({
         queryKey: TODO_QUERY_KEY.LIST,
       });
+      queryClient.invalidateQueries({
+        queryKey: [TODO_QUERY_KEY.LIST, TODO_QUERY_KEY.TODAY_ALL],
+      });
     },
   });
 

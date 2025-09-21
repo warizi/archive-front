@@ -40,7 +40,7 @@ function CountCard({ title, count, unit, icon, children, className, link }: Coun
         )}
       </CardHeader>
       <CardContent>
-        <Horizontal justify="start" align="end" className="gap-2 mb-4">
+        <Horizontal justify="start" align="end" className="gap-2 sm:mb-4">
           <CountUp
             start={0}
             end={count}
@@ -50,7 +50,9 @@ function CountCard({ title, count, unit, icon, children, className, link }: Coun
           />
           <span>{unit}</span>
         </Horizontal>
-        {children}
+        <div className="w-fll hidden sm:block">
+          {children}
+        </div>
       </CardContent>
     </Card>
   );

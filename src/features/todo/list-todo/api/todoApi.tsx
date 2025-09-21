@@ -44,6 +44,11 @@ export const getCategorizedRepeatTodoListApi = async ({ id }: {id:number}): Prom
   return response?.data;
 }
 
+export const getTodayAllApi = async (): Promise<ApiResponse<TodoWithIdPresent[]>> => {
+  const response = await apiClient.get<ApiResponse<TodoWithIdPresent[]>>(`/api/todos/today/all`);
+  return response.data;
+}
+
 export const getFrequencyRepeatTodoListApi = async ({ page = 0, size = 20, sort="id,desc", frequency }: { frequency: keyof typeof TODO_REPEAT_FREQUENCY } & PageRequest): Promise<PageResponse<TodoWithIdPresent>> => {
   const response = await apiClient.get<ApiResponse<PageResponse<TodoWithIdPresent>>>(`/api/todos/repeat/${frequency}`, {
     params: { page, size, sort }

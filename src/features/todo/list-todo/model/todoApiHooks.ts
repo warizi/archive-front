@@ -1,6 +1,6 @@
 import { TODO_QUERY_KEY, TODO_REPEAT_FREQUENCY } from "@/entities/todo";
 import { useQuery } from "@tanstack/react-query";
-import { getCategorizedRepeatTodoListApi, getCategorizedTodoListApi, getFrequencyRepeatTodoListApi, getTodoApi, getTodoListApi, getUnCategorizedRepeatTodoListApi, getUnCategorizedTodoListApi } from "../api/todoApi";
+import { getCategorizedRepeatTodoListApi, getCategorizedTodoListApi, getFrequencyRepeatTodoListApi, getTodayAllApi, getTodoApi, getTodoListApi, getUnCategorizedRepeatTodoListApi, getUnCategorizedTodoListApi } from "../api/todoApi";
 import type { PageRequest } from "@/shared/type/request";
 
 export const useGetTodo = (id?: number) => useQuery({
@@ -37,4 +37,9 @@ export const useGetCategorizedRepeatTodoList = ({ id }: { id: number }) => useQu
 export const useGetFrequencyRepeatTodoList = ({ page, size, sort, frequency }: { frequency: keyof typeof TODO_REPEAT_FREQUENCY } & PageRequest) => useQuery({
   queryKey: TODO_QUERY_KEY.REPEAT_FREQUENCY(frequency),
   queryFn: () => getFrequencyRepeatTodoListApi({ page, size, sort, frequency })
+})
+
+export const useGetTodayAllTodoList = () => useQuery({
+  queryKey: [TODO_QUERY_KEY.LIST, TODO_QUERY_KEY.TODAY_ALL],
+  queryFn: () => getTodayAllApi()
 })

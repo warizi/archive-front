@@ -11,6 +11,7 @@ import {
 import TodoRow from "./ui/TodoRow";
 import TodoListCard from "./ui/TodoListCard";
 import RepeatTodoListCard  from "./ui/RepeatTodoListCard";
+import TodayTodoListCard from "./ui/TodayTodoListCard";
 
 export {
   useGetUnCategorizedTodoList,
@@ -22,5 +23,6 @@ export {
   useGetFrequencyRepeatTodoList,
   TodoRow,
   TodoListCard,
-  RepeatTodoListCard
+  RepeatTodoListCard,
+  TodayTodoListCard
 }

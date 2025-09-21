@@ -5,6 +5,8 @@ export const TODO_QUERY_KEY = {
   COUNT_COMPLETED: ["countCompleted"],
   COUNT_UNCOMPLETED: ["countUncompleted"],
   COUNT_REPEAT: ["countRepeat"],
+  CHART_COMPLETED_WEEK: ["chartCompletedWeek"],
+  TODAY_ALL: "todayAll",
   CATEGORIZED: (categoryId: number) => ["todos", "category", categoryId],
   REPEAT: ["todos", "repeat"],
   REPEAT_CATEGORIZED: (categoryId: number) => ["todos", "repeat", "category", categoryId],

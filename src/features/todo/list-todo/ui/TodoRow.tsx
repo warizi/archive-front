@@ -40,7 +40,7 @@ function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled, catego
     <Sheet open={isSheetOpen} onOpenChange={handleCloseEffect}>
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div>
-          <div className="flex w-[332px] gap-2 hover:bg-muted px-2 rounded-md group transition-colors duration-500">
+          <div className="flex w-full gap-2 hover:bg-muted px-2 rounded-md group transition-colors duration-500">
             { !checkBoxDisabled && <TodoCheckbox id={todo.id} completed={todo.completed} className="shrink-0 mt-[10px]"/>}
             <SheetTrigger asChild>
               <div 
