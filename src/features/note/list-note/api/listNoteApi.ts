@@ -7,3 +7,9 @@ export const getNoteListInFolder = async (folderId: number): Promise<ApiResponse
   
   return response.data;
 }
+
+export const getRecentNoteList = async (): Promise<ApiResponse<NoteWithIdPresent[]>> => {
+  const response = await apiClient.get<ApiResponse<NoteWithIdPresent[]>>(`/api/note/recent`);
+  
+  return response.data;
+}

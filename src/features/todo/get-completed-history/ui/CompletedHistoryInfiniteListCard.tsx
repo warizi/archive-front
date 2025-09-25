@@ -61,6 +61,7 @@ function CompletedHistoryInfiniteListCard() {
     }
   }, [noOverflow, inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  console.log(items.length);
   return (
     <Card className="p-2 gap-1 sm:w-full min-w-[350px] max-h-[calc(100vh-85px)]">
       <CardHeader className="p-2 w-full">

@@ -35,9 +35,9 @@ function FilterCategoryDropdownMenu() {
   };
 
   useEffect(() => {
-    const allList = data?.content.map(category => category.id) || [];
+    const allList = data?.content.map(category => category.id);
     // 카테고리가 없을 경우 미분류 항상 노출
-    if (allList.length === 0) {
+    if (allList && allList.length === 0) {
       addSelectedCategory(UNCATEGORIZED_ID);
     }
   }, [addSelectedCategory, data, removeDirtyCategories]);

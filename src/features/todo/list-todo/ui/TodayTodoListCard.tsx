@@ -1,5 +1,4 @@
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card";
-import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { useGetTodayAllTodoList } from "../model/todoApiHooks";
 import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard";
 import TodoRow from "./TodoRow";
@@ -7,11 +6,19 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/shared/co
 import { Button } from "@/shared/components/ui/button";
 import { ChevronsUpDown } from "lucide-react";
 
+const importanceOrder = new Map<string, number>([
+  ["high", 3],
+  ["medium", 2],
+  ["low", 1],
+  ["none", 0]
+]);
+
 function TodayTodoListCard() {
   const { data } = useGetTodayAllTodoList();
   const todoList = data?.data ?? [];
-
-  console.log("TodayTodoListCard - todoList:", todoList);
+  const sortedTodoList = todoList.sort((a, b) => {
+    return (importanceOrder.get(b?.importance || "none") || 0) - (importanceOrder.get(a.importance || "none") || 0);
+  });
   return (
     <Collapsible defaultOpen={true}>
       <Card>
@@ -30,18 +37,16 @@ function TodayTodoListCard() {
           </CardAction>
         </CardHeader>
         <CollapsibleContent>
-          <CardContent className="max-h-[300px]">
-            <ScrollArea className="h-full">
-              {
-                todoList.length === 0 && (
-                  <EmptyMessageCard message="오늘 할 일이 없습니다."/>
-                )
-              }
-              {
-                todoList.map((todo) => (
-                  <TodoRow key={todo.id} todo={todo} sheetDisabled deleteDisabled/>
-                ))}
-            </ScrollArea>
+          <CardContent className="max-h-[300px] overflow-auto">
+            {
+              sortedTodoList.length === 0 && (
+                <EmptyMessageCard message="오늘 할 일이 없습니다."/>
+              )
+            }
+            {
+              sortedTodoList.map((todo) => (
+                <TodoRow key={todo.id} todo={todo} sheetDisabled deleteDisabled/>
+              ))}
           </CardContent>
         </CollapsibleContent>
       </Card>

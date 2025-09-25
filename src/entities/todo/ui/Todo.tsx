@@ -22,9 +22,9 @@ function Todo({ data, onClick, className, categoryTagDisplay = true }: TodoProps
 
   return (
     <HoverCard openDelay={1000}>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full min-w-0">
         <div 
-          className={cn(`flex flex-row gap-2 min-h-[35px] pl-2 cursor-pointer`, className)} 
+          className={cn(`flex flex-row gap-2 min-h-[35px] pl-2 cursor-pointer w-full min-w-0`, className)} 
           onClick={() => onClick?.(data)}
         >
           {categoryTagDisplay && data?.category && (
@@ -33,12 +33,12 @@ function Todo({ data, onClick, className, categoryTagDisplay = true }: TodoProps
             </div>
           )}
           <HoverCardTrigger asChild>
-            <div className="flex-1 min-w-0 flex flex-col py-2">
-              <div className="w-full flex items-center gap-2">
+            <div className="flex-1 min-w-0 w-full flex flex-col py-2">
+              <div className="w-full flex items-center gap-2 min-w-0">
                 {data?.importance && <Dot size={6} className={`scale-600 shrink-0`} color={importanceColor}/>}
                 <span
                   className={cn(
-                    "block truncate text-sm", // truncate = overflow-hidden + text-ellipsis + whitespace-nowrap
+                    "block w-full truncate text-sm min-w-0", // truncate = overflow-hidden + text-ellipsis + whitespace-nowrap
                     { "line-through text-gray-700": data.completed }
                   )}
                 >

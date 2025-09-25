@@ -17,6 +17,15 @@ export const useCompleteTodoMutate = () => {
       queryClient.invalidateQueries({
         queryKey: [TODO_QUERY_KEY.LIST, TODO_QUERY_KEY.TODAY_ALL],
       });
+      queryClient.invalidateQueries({
+        queryKey: [TODO_QUERY_KEY.LIST, TODO_QUERY_KEY.COUNT_COMPLETED],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [TODO_QUERY_KEY.LIST, TODO_QUERY_KEY.COUNT_UNCOMPLETED],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [TODO_QUERY_KEY.LIST, TODO_QUERY_KEY.CHART_COMPLETED_WEEK],
+      });
     },
   })
 }

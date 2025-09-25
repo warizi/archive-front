@@ -3,7 +3,8 @@ import z from "zod";
 export const NOTE_QUERY_KEY = {
   list: "noteList",
   count: "noteCount",
-  detail: "noteDetail"
+  detail: "noteDetail",
+  recent: "recentNoteList"
 }
 
 export const NOTE_VALID = {

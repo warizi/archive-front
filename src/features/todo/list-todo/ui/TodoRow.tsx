@@ -38,15 +38,15 @@ function TodoRow({ todo, sheetDisabled, checkBoxDisabled, deleteDisabled, catego
 
   return (
     <Sheet open={isSheetOpen} onOpenChange={handleCloseEffect}>
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div>
-          <div className="flex w-full gap-2 hover:bg-muted px-2 rounded-md group transition-colors duration-500">
+      <Collapsible open={isOpen} onOpenChange={setIsOpen} asChild>
+        <div className="w-full min-w-0">
+          <div className="flex min-w-0 w-full gap-2 hover:bg-muted px-2 rounded-md group transition-colors duration-500">
             { !checkBoxDisabled && <TodoCheckbox id={todo.id} completed={todo.completed} className="shrink-0 mt-[10px]"/>}
             <SheetTrigger asChild>
               <div 
                 aria-label={`할 일 상세 열기: ${todo.title}`}
                 aria-describedby={`todo-desc-${todo.id}`}
-                className="flex-1 min-w-0"
+                className="flex-1 min-w-0 overflow-hidden w-full"
               >
               <Todo data={todo} className="w-full overflow-hidden" categoryTagDisplay={categoryTagDisplay} />
               </div>
