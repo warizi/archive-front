@@ -4,7 +4,7 @@ Archive Front는 React19와 Typescript로 구축되었습니다.
 FSD(Feature slide Design) 아키텍처를 채택하여 유지보수성과 확장성에 중점을 두었습니다.
 
 # 데모
-[demo/demo.mov](demo/demo.mov)
+[demo/demo.gif](demo/demo.gif)
 
 # 기술스택
 - 언어: TypeScript
