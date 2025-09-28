@@ -4,14 +4,24 @@ import { useCompletedTodoHistoryInfiniteQuery } from "../model/completedHistoryA
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useGetCategoryListQuery } from "@/features/category/model/categoryApiHooks";
-import { CategoryTag, type CategoryType } from "@/entities/catogory";
-import Horizontal from "@/shared/components/ui/Horizontal";
+import EmptyMessageCard from "@/shared/components/ui/EmptyMessageCard.tsx";
+import type { TodoCompletedHistory } from "@/entities/todo";
+import CompletedDayGroup from "./CompletedDayGroup";
 
 function CompletedHistoryInfiniteListCard() {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isError, refetch } =
-    useCompletedTodoHistoryInfiniteQuery(10);
+  const { 
+    data, 
+    fetchNextPage, 
+    hasNextPage, 
+    isFetchingNextPage, 
+    isLoading, 
+    isError, 
+    refetch 
+  } = useCompletedTodoHistoryInfiniteQuery(10);
 
-  const { data: categoryData } = useGetCategoryListQuery({
+  const { 
+    data: categoryData 
+  } = useGetCategoryListQuery({
     page: 0,
     size: 100,
     sort: "id,sortOrder"
@@ -19,7 +29,6 @@ function CompletedHistoryInfiniteListCard() {
 
   const items = useMemo(() => data?.items ?? [], [data]);
 
-  // ✅ ScrollArea 래퍼 참조 → 내부 viewport를 root로 사용
   const scrollAreaWrapperRef = useRef<HTMLDivElement | null>(null);
   const [viewportEl, setViewportEl] = useState<HTMLElement | null>(null);
   const [noOverflow, setNoOverflow] = useState(false);
@@ -49,10 +58,10 @@ function CompletedHistoryInfiniteListCard() {
     initialInView: false,
   });
 
-  const findCategoryById = (id: number): CategoryType | undefined => {
-    const category = categoryData?.content.find(cat => cat.id === id);
-    if (category) return category;
-  }
+  // const findCategoryById = (id: number): CategoryType | undefined => {
+  //   const category = categoryData?.content.find(cat => cat.id === id);
+  //   if (category) return category;
+  // }
 
   useEffect(() => {
     // 스크롤이 실제로 생긴 경우에만 자동 로드
@@ -61,7 +70,15 @@ function CompletedHistoryInfiniteListCard() {
     }
   }, [noOverflow, inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  console.log(items.length);
+  // 날짜별로 그룹핑
+  const todoRecordsByDate: Record<string, TodoCompletedHistory[]> = {};
+  items.forEach((item) => {
+    if (!todoRecordsByDate[item.completedDate]) {
+      todoRecordsByDate[item.completedDate] = [];
+    }
+    todoRecordsByDate[item.completedDate].push(item);
+  });
+
   return (
     <Card className="p-2 gap-1 sm:w-full min-w-[350px] max-h-[calc(100vh-85px)]">
       <CardHeader className="p-2 w-full">
@@ -80,22 +97,19 @@ function CompletedHistoryInfiniteListCard() {
                 </li>
               )}
 
-              {items.map((it) => {
-                const category = it.categoryId ? findCategoryById(it.categoryId) : null;
-                return (
-                  <li key={`${it.type}-${it.id}`} className="rounded-md border p-2">
-                    <Horizontal className="gap-1">
-                      {category && <CategoryTag category={category} size={12} />}
-                      <div className="text-sm font-medium truncate">
-                        {it.title}
-                      </div>
-                    </Horizontal>
-                    <div className="text-xs text-muted-foreground">
-                      {it.type} • {it.completedDate}{it.importance ? ` • ${it.importance}` : ""}
-                    </div>
-                  </li>
-                )
-              })}
+              {
+                todoRecordsByDate && Object.keys(todoRecordsByDate).map(date => {
+                  const todos = todoRecordsByDate[date];
+                  return (
+                    <CompletedDayGroup 
+                      key={date}
+                      date={date} 
+                      todos={todos} 
+                      categories={categoryData?.content ?? []}
+                    />
+                  )
+                })
+              }
 
               {/* 센티넬: 스크롤이 생긴 경우에만 자동으로 다음 페이지 트리거 */}
               {hasNextPage && !noOverflow && (
@@ -122,7 +136,7 @@ function CompletedHistoryInfiniteListCard() {
               )}
 
               {!isLoading && !items.length && (
-                <li className="text-sm text-muted-foreground">완료 기록이 없습니다.</li>
+                  <EmptyMessageCard message={"완요한 일이 없습니다."} />
               )}
             </ul>
           </ScrollArea>
