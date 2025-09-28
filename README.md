@@ -11,6 +11,9 @@ FSD(Feature slide Design) 아키텍처를 채택하여 유지보수성과 확장
 ## 대시보드
 ![데모](demo/대시보드.gif)
 
+#URL
+http://52.78.144.171
+
 # 기술스택
 - 언어: TypeScript
 - 프레임워크: React 19, Vite
