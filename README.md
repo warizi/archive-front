@@ -1,69 +1,49 @@
-# React + TypeScript + Vite
+# Archive Front
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Archive Front는 React19와 Typescript로 구축되었습니다.
+FSD(Feature slide Design) 아키텍처를 채택하여 유지보수성과 확장성에 중점을 두었습니다.
 
-Currently, two official plugins are available:
+# 기술스택
+- 언어: TypeScript
+- 프레임워크: React 19, Vite
+- 라우트: React-Router-Dom
+- UI: Tailwind CSS, Shadcn UI, Radix UI, Lucide
+- 상태관리: Zustand
+- 서버상태관리: Tanstack Query
+- 폼/검증: Zod
+- 에디터: Tiptap
+- 데이터 시각화: Recharts
+- 빌드/도구: Vite, ESLint, Typescript
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 주요기능
+- 카테고리별 Todo 관리
+- 반복 할 일 관리
+- 완료한 일 히스토리
+- 폴더 별 Note 관리
+- 대시보드
 
-## Expanding the ESLint configuration
+# 프로젝트 구조
+- app: 앱 레벨 프로바이더, 라우트 가드, 레이아웃
+- entities: 도메인 엔티티와 타입
+- features: 기능 모듈 (category, note, todo, user, workspace)
+- widgets: 복합 UI 블록
+- pages: 라우트 단위 페이지
+- shared: 공용 UI, 라이브러리, 유틸
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# 시작하기
+사전준비
+- Node.js 18+ 
+- npm
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+의존성 설치
+- npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+환경변수
+- .env.development.local / .env.production.local 
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+개발서버
+- npm run dev
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+빌드
+- npm run build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
